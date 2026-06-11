@@ -10,7 +10,7 @@
  * Déployer (Cloudflare + cron trigger quotidien) : voir flue/README.md
  */
 import { createAgent, defineTool, Type } from "@flue/runtime";
-import { pending, record, standings } from "./lib/scoring.js";
+import { pending, record, standings } from "../lib/scoring.js";
 
 /** Date du jour au format YYYY-MM-DD (UTC). */
 const today = () => new Date().toISOString().slice(0, 10);

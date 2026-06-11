@@ -3,3 +3,6 @@ node_modules/
 *.log
 .wrangler/
 dist/
+.env
+.dev.vars
+flue/flue.config.ts
