@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Prono Battle — Mondial 2026</title>
+<meta name="description" content="Claude vs GPT vs Gemini : qui pronostique le mieux la phase de poules de la Coupe du Monde 2026 ?" />
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --card: #161d2e;
+    --line: #243049;
+    --text: #e8edf7;
+    --muted: #8b96ad;
+    --claude: #d4854a;
+    --gpt: #19c37d;
+    --gemini: #6c8cff;
+    --ok: #2ec27e;
+    --ko: #3a4458;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: radial-gradient(1200px 600px at 50% -10%, #1a2336 0%, var(--bg) 55%);
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 16px 80px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  header { text-align: center; padding: 56px 0 32px; }
+  .kicker {
+    display: inline-block; font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px; margin-bottom: 18px;
+  }
+  h1 { font-size: clamp(28px, 6vw, 44px); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+  h1 .grad { background: linear-gradient(90deg, var(--claude), var(--gpt), var(--gemini)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { color: var(--muted); margin-top: 10px; font-size: 15px; }
+  .updated { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+  .podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 36px; }
+  @media (max-width: 560px) { .podium { grid-template-columns: 1fr; } }
+  .ai-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px;
+    position: relative; overflow: hidden;
+  }
+  .ai-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--accent); }
+  .ai-card .rank { position: absolute; top: 16px; right: 18px; font-size: 22px; }
+  .ai-name { font-weight: 700; font-size: 18px; color: var(--accent); }
+  .ai-pts { font-size: 42px; font-weight: 800; letter-spacing: -.02em; margin-top: 6px; }
+  .ai-pts small { font-size: 15px; font-weight: 600; color: var(--muted); }
+  .ai-meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .bar { height: 6px; background: #0c1322; border-radius: 99px; margin-top: 14px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .6s ease; }
+
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 0 0 16px; }
+  .controls select, .controls button {
+    background: var(--bg2); color: var(--text); border: 1px solid var(--line);
+    border-radius: 10px; padding: 8px 12px; font-size: 14px; cursor: pointer;
+  }
+  .controls .spacer { flex: 1; }
+  .controls .count { color: var(--muted); font-size: 13px; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  thead th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 12px 14px; border-bottom: 1px solid var(--line); }
+  thead th.c, tbody td.c { text-align: center; }
+  tbody td { padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #1a2237; }
+  .grp { display: inline-block; min-width: 20px; text-align: center; font-weight: 700; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; margin-right: 8px; }
+  .res { font-weight: 700; }
+  .score { color: var(--muted); font-weight: 500; }
+  .mark { font-size: 15px; }
+  .empty { text-align: center; color: var(--muted); padding: 48px 16px; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 32px; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker">Coupe du Monde FIFA 2026 · Phase de poules</span>
+    <h1>🏆 <span class="grad">AI Prono Battle</span></h1>
+    <p class="sub">Claude vs GPT vs Gemini — qui pronostique le mieux les 72 matchs de poule ?<br>1 point par résultat juste (vainqueur ou nul).</p>
+    <p class="updated" id="updated"></p>
+  </header>
+
+  <section class="podium" id="podium"></section>
+
+  <div class="controls">
+    <select id="group"><option value="">Tous les groupes</option></select>
+    <select id="filter">
+      <option value="played">Matchs joués</option>
+      <option value="all">Tous les matchs (72)</option>
+    </select>
+    <span class="spacer"></span>
+    <span class="count" id="count"></span>
+  </div>
+
+  <table id="tbl">
+    <thead>
+      <tr>
+        <th>Match</th>
+        <th>Résultat</th>
+        <th class="c" style="color:var(--claude)">Claude</th>
+        <th class="c" style="color:var(--gpt)">GPT</th>
+        <th class="c" style="color:var(--gemini)">Gemini</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <div class="empty" id="empty" hidden>Aucun match joué pour l'instant. Reviens après le coup d'envoi ! ⚽</div>
+
+  <footer>
+    Données : pronostics figés des 3 IA + résultats réels saisis au fil des matchs.
+    Le classement se met à jour automatiquement.
+  </footer>
+</div>
+
+<script>
+const AIS = [
+  { key: "claude", label: "Claude", color: "var(--claude)" },
+  { key: "gpt",    label: "GPT",    color: "var(--gpt)" },
+  { key: "gemini", label: "Gemini", color: "var(--gemini)" },
+];
+const MEDALS = ["🥇", "🥈", "🥉"];
+
+async function load() {
+  const [pred, res] = await Promise.all([
+    fetch("data/predictions.json").then(r => r.json()),
+    fetch("data/results.json").then(r => r.json()),
+  ]);
+  return { matches: pred.matches, results: res.results || {}, updated: res.last_updated };
+}
+
+function compute(matches, results) {
+  const totals = Object.fromEntries(AIS.map(a => [a.key, { pts: 0, graded: 0 }]));
+  const rows = matches.map(m => {
+    const actual = results[String(m.id)];
+    const hits = {};
+    if (actual) {
+      for (const a of AIS) {
+        const hit = m.pred[a.key] === actual.winner;
+        hits[a.key] = hit;
+        totals[a.key].pts += hit ? 1 : 0;
+        totals[a.key].graded += 1;
+      }
+    }
+    return { ...m, actual, hits };
+  });
+  return { rows, totals };
+}
+
+function renderPodium(totals) {
+  const ranked = [...AIS].sort((a, b) => totals[b.key].pts - totals[a.key].pts);
+  const max = Math.max(1, ...AIS.map(a => totals[a.key].pts));
+  document.getElementById("podium").innerHTML = ranked.map((a, i) => {
+    const t = totals[a.key];
+    const pct = t.graded ? Math.round(100 * t.pts / t.graded) : 0;
+    return `<div class="ai-card" style="--accent:${a.color}">
+      <span class="rank">${MEDALS[i] || ""}</span>
+      <div class="ai-name">${a.label}</div>
+      <div class="ai-pts">${t.pts}<small> pts</small></div>
+      <div class="ai-meta">${t.graded ? `${pct}% de réussite · ${t.graded} matchs` : "en attente"}</div>
+      <div class="bar"><i style="width:${(t.pts / max) * 100}%"></i></div>
+    </div>`;
+  }).join("");
+}
+
+function mark(hit) {
+  if (hit === undefined) return `<span class="mark" style="color:var(--muted)">·</span>`;
+  return hit ? `<span class="mark">✅</span>` : `<span class="mark">❌</span>`;
+}
+
+function renderTable(rows) {
+  const group = document.getElementById("group").value;
+  const filter = document.getElementById("filter").value;
+  let view = rows;
+  if (group) view = view.filter(r => r.group === group);
+  if (filter === "played") view = view.filter(r => r.actual);
+
+  const tbody = document.getElementById("rows");
+  const empty = document.getElementById("empty");
+  document.getElementById("count").textContent = `${view.length} match${view.length > 1 ? "s" : ""}`;
+
+  if (!view.length) { tbody.innerHTML = ""; empty.hidden = false; return; }
+  empty.hidden = true;
+  tbody.innerHTML = view.map(r => {
+    const score = r.actual?.score ? `<span class="score"> ${r.actual.score}</span>` : "";
+    const result = r.actual
+      ? `<span class="res">${r.actual.winner}</span>${score}`
+      : `<span style="color:var(--muted)">${r.date.slice(5).replace("-", "/")}</span>`;
+    return `<tr>
+      <td><span class="grp">${r.group}</span>${r.home} – ${r.away}</td>
+      <td>${result}</td>
+      <td class="c">${mark(r.hits.claude)}</td>
+      <td class="c">${mark(r.hits.gpt)}</td>
+      <td class="c">${mark(r.hits.gemini)}</td>
+    </tr>`;
+  }).join("");
+}
+
+(async function init() {
+  let state;
+  try {
+    const { matches, results, updated } = await load();
+    state = compute(matches, results);
+    document.getElementById("updated").textContent =
+      updated ? `Dernière mise à jour : ${updated}` : "En attente des premiers résultats";
+    // remplir le filtre de groupes
+    const groups = [...new Set(matches.map(m => m.group))].sort();
+    document.getElementById("group").insertAdjacentHTML("beforeend",
+      groups.map(g => `<option value="${g}">Groupe ${g}</option>`).join(""));
+  } catch (e) {
+    document.getElementById("podium").innerHTML =
+      `<div class="empty" style="grid-column:1/-1">Impossible de charger les données (${e}).</div>`;
+    return;
+  }
+  renderPodium(state.totals);
+  renderTable(state.rows);
+  document.getElementById("group").addEventListener("change", () => renderTable(state.rows));
+  document.getElementById("filter").addEventListener("change", () => renderTable(state.rows));
+})();
+</script>
+</body>
+</html>

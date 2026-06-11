@@ -1,0 +1,5 @@
+{
+  "_comment": "État persistant (la mémoire). À chaque run, /prono-recap ajoute ici les vrais résultats des matchs joués. winner = nom d'équipe canonique (voir predictions.json) ou 'Nul'. score optionnel (ex '2-1').",
+  "last_updated": null,
+  "results": {}
+}
