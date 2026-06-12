@@ -44,7 +44,18 @@ te sort le classement. `data/results.json` est mis à jour — le dashboard refl
   scores tout seul. Tant que ce n'est pas fait, l'autonomie totale n'est pas possible —
   d'où l'intérêt du skill `/prono-recap` (lui a la recherche web de Claude Code).
 
-## 3. Exécution one-shot (pour un cron)
+## 3. Logs & observabilité
+
+| Commande | Ce que ça donne |
+|---|---|
+| `npm run connect` (`flue connect`) | Sortie **live** dans le terminal : appels d'outils (`list_pending` → `record_result` → `get_standings`) et réponses de l'agent au fil de l'eau. C'est le log principal en interactif. |
+| `npx flue dev --target node` | Serveur de dev en watch-mode (reload auto), port **3583**. |
+| `npx flue logs` | Rejoue / suit les événements d'un run depuis un serveur lancé. |
+| OpenTelemetry | Flue émet des traces OTel — à brancher sur un collector pour du tracing structuré (prod). |
+
+Pour démarrer, `connect` suffit : tu vois l'agent travailler en direct.
+
+## 4. Exécution one-shot (pour un cron)
 
 ```bash
 npm run daily               # = npx flue run prono-agent  (une invocation, pas d'interactif)
@@ -53,7 +64,7 @@ npm run daily               # = npx flue run prono-agent  (une invocation, pas d
 Planifie-le avec un cron système ou un GitHub Actions quotidien (ex. `0 9 * * *`) qui lance
 cette commande puis commit `data/results.json` → le dashboard se rafraîchit seul.
 
-## 4. Déployer sur Cloudflare (optionnel)
+## 5. Déployer sur Cloudflare (optionnel)
 
 ```bash
 npx flue init --target cloudflare
