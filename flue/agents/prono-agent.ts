@@ -110,8 +110,10 @@ const fetchUrl = defineTool({
 });
 
 export default createAgent(() => ({
-  // Provider Google (clé GEMINI_API_KEY). Voir les ids dispo : https://pi.dev/docs/latest/providers
-  model: "google/gemini-2.5-pro",
+  // Provider Google (clé GEMINI_API_KEY). gemini-2.5-flash = éligible free tier ;
+  // gemini-2.5-pro exige un projet Google avec facturation (sinon 429 "limit: 0").
+  // Catalogue des ids : https://pi.dev/docs/latest/providers
+  model: "google/gemini-2.5-flash",
   tools: [listPending, recordResult, getStandings, fetchResults, fetchUrl],
   instructions: `Tu tiens le "AI Prono Battle" de la Coupe du Monde 2026 : trois IA (Claude, GPT, Gemini)
 ont pronostiqué les 72 matchs de poule (vainqueur ou nul). Scoring : 1 point par résultat juste.

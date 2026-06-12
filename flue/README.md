@@ -33,8 +33,10 @@ cp .env.example .env        # puis mets ta vraie clé dans .env
 
 `flue.config.ts` est déjà committé (cible node). Si besoin de le régénérer : `npm run init`.
 
-> Modèle utilisé : `google/gemini-2.5-pro` (clé `GEMINI_API_KEY`). Pour un autre id Gemini
-> ou un autre provider, change `model:` dans `agents/prono-agent.ts` — catalogue : https://pi.dev/docs/latest/providers
+> Modèle utilisé : `google/gemini-2.5-flash` (clé `GEMINI_API_KEY`) — **éligible au free tier**.
+> ⚠️ `gemini-2.5-pro` renvoie `429 limit: 0` sans facturation activée sur le projet Google :
+> il n'est pas dispo en gratuit. Pour un autre id ou provider, change `model:` dans
+> `agents/prono-agent.ts` — catalogue : https://pi.dev/docs/latest/providers
 
 ## 2. Lancer en local (interactif)
 
