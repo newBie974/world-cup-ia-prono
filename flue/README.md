@@ -10,7 +10,7 @@ flue/
 ├─ agents/prono-agent.ts   ← l'agent (découvert par son nom de module : "prono-agent")
 ├─ lib/scoring.ts          ← scoring partagé, lit/écrit ../../data/*.json
 ├─ package.json
-└─ .env                    ← ANTHROPIC_API_KEY (à créer, gitignoré)
+└─ .env                    ← GEMINI_API_KEY (à créer, gitignoré)
 ```
 
 Flue découvre les agents dans `agents/`. L'agent expose 3 outils :
@@ -25,6 +25,9 @@ cp .env.example .env        # puis mets ta vraie clé dans .env
 npx flue init --target node # génère flue.config.ts
 ```
 
+> Modèle utilisé : `google/gemini-2.5-pro` (clé `GEMINI_API_KEY`). Pour un autre id Gemini
+> ou un autre provider, change `model:` dans `agents/prono-agent.ts` — catalogue : https://pi.dev/docs/latest/providers
+
 ## 2. Lancer en local (interactif)
 
 ```bash
@@ -35,7 +38,7 @@ Tu discutes avec l'agent : il appelle `list_pending` pour voir les matchs joués
 tu lui donnes (ou il recherche) les scores, il appelle `record_result`, puis `get_standings`
 te sort le classement. `data/results.json` est mis à jour — le dashboard reflète aussitôt.
 
-⚠️ **Recherche des résultats** : le modèle Anthropic seul n'a pas d'accès web. Deux options :
+⚠️ **Recherche des résultats** : le modèle seul n'a pas d'accès web. Deux options :
 - **interactif** : tu colles/confirmes les scores dans la session `connect` (le plus simple) ;
 - **autonome** : ajoute un outil web (fetch/search) dans `tools` pour que l'agent récupère les
   scores tout seul. Tant que ce n'est pas fait, l'autonomie totale n'est pas possible —
@@ -54,7 +57,7 @@ cette commande puis commit `data/results.json` → le dashboard se rafraîchit s
 
 ```bash
 npx flue init --target cloudflare
-npx wrangler secret put ANTHROPIC_API_KEY
+npx wrangler secret put GEMINI_API_KEY
 npm run build               # npx flue build --target cloudflare
 npx wrangler deploy
 ```

@@ -54,7 +54,8 @@ const getStandings = defineTool({
 });
 
 export default createAgent(() => ({
-  model: "anthropic/claude-sonnet-4-6",
+  // Provider Google (clé GEMINI_API_KEY). Voir les ids dispo : https://pi.dev/docs/latest/providers
+  model: "google/gemini-2.5-pro",
   tools: [listPending, recordResult, getStandings],
   instructions: `Tu tiens le "AI Prono Battle" de la Coupe du Monde 2026 : trois IA (Claude, GPT, Gemini)
 ont pronostiqué les 72 matchs de poule (vainqueur ou nul). Scoring : 1 point par résultat juste.
