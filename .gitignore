@@ -5,4 +5,3 @@ node_modules/
 dist/
 .env
 .dev.vars
-flue/flue.config.ts

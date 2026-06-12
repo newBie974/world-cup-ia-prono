@@ -5,9 +5,9 @@
   "type": "module",
   "description": "Agent Flue qui tient le classement AI Prono Battle (Mondial 2026)",
   "scripts": {
+    "init": "flue init --target node",
     "connect": "flue connect prono-agent local",
-    "daily": "flue run prono-agent",
-    "build": "flue build --target cloudflare"
+    "build": "flue build --target node"
   },
   "dependencies": {
     "@flue/runtime": "latest"

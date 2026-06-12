@@ -17,14 +17,21 @@ Flue découvre les agents dans `agents/`. L'agent expose 5 outils (voir `agents/
 `list_pending`, `record_result`, `get_standings`, et pour l'autonomie **`fetch_results`**
 (scores réels via l'API JSON TheSportsDB) + **`fetch_url`** (secours générique, lit une page web).
 
+> ⚠️ **Piège de nom à connaître.** Le CLI s'appelle `@flue/cli` (scopé). Le paquet npm
+> **non-scopé `flue`** est un squatteur sans rapport (un "Firebase search utility").
+> Donc **n'exécute jamais `npx flue …` AVANT `npm install`** : npx irait télécharger le
+> squatteur. Installe d'abord, puis utilise les **scripts npm** (`npm run …`) ou le binaire
+> local `./node_modules/.bin/flue` — qui pointent toujours sur le bon `@flue/cli`.
+
 ## 1. Installer
 
 ```bash
 cd flue
-npm install
+npm install                 # installe @flue/cli + @flue/runtime EN LOCAL (indispensable d'abord)
 cp .env.example .env        # puis mets ta vraie clé dans .env
-npx flue init --target node # génère flue.config.ts
 ```
+
+`flue.config.ts` est déjà committé (cible node). Si besoin de le régénérer : `npm run init`.
 
 > Modèle utilisé : `google/gemini-2.5-pro` (clé `GEMINI_API_KEY`). Pour un autre id Gemini
 > ou un autre provider, change `model:` dans `agents/prono-agent.ts` — catalogue : https://pi.dev/docs/latest/providers
@@ -32,7 +39,7 @@ npx flue init --target node # génère flue.config.ts
 ## 2. Lancer en local (interactif)
 
 ```bash
-npm run connect             # = npx flue connect prono-agent local
+npm run connect             # = flue connect prono-agent local  (binaire local, jamais le squatteur)
 ```
 
 Tu discutes avec l'agent : il appelle `list_pending` pour voir les matchs joués non notés,
@@ -60,14 +67,14 @@ Il n'enregistre que les matchs `finished=true`.
 
 Pour démarrer, `connect` suffit : tu vois l'agent travailler en direct.
 
-## 4. Exécution one-shot (pour un cron)
+## 4. One-shot / cron
 
-```bash
-npm run daily               # = npx flue run prono-agent  (une invocation, pas d'interactif)
-```
+`flue run` cible des **workflows**, pas des agents — notre `prono-agent` se pilote donc via
+`connect` (interactif). Pour une exécution quotidienne non-interactive, deux pistes :
+- envelopper l'appel dans un **workflow** Flue (`flue run <workflow>`), puis le planifier ;
+- ou plus simple aujourd'hui : laisser le skill `/prono-recap` (Claude Code) faire le run quotidien.
 
-Planifie-le avec un cron système ou un GitHub Actions quotidien (ex. `0 9 * * *`) qui lance
-cette commande puis commit `data/results.json` → le dashboard se rafraîchit seul.
+Dans tous les cas, le cron commit `data/results.json` → le dashboard se rafraîchit seul.
 
 ## 5. Déployer sur Cloudflare (optionnel)
 
