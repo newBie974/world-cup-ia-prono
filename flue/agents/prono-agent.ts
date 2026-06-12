@@ -12,6 +12,7 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { createAgent, defineTool, Type } from "@flue/runtime";
+import { local } from "@flue/runtime/node";
 import { pending, record, standings, REPO_ROOT } from "../lib/scoring.js";
 
 const exec = promisify(execFile);
@@ -146,6 +147,16 @@ export default createAgent(() => ({
   // gemini-2.5-pro exige un projet Google avec facturation (sinon 429 "limit: 0").
   // Catalogue des ids : https://pi.dev/docs/latest/providers
   model: "google/gemini-2.5-flash",
+
+  // Sandbox-aware : le workspace du modèle (bash/fs natifs) est borné au repo via cwd,
+  // avec l'allowlist d'env par défaut (pas d'exposition globale des secrets host).
+  // Les vraies actions privilégiées passent par des OUTILS bornés ci-dessous, pas par le shell.
+  sandbox: local({ cwd: REPO_ROOT }),
+
+  // Durable execution : couplé au db.ts (sqlite fichier), un run interrompu est repris/réconcilié
+  // au redémarrage (jamais rejoué aveuglément → nos tools record_result/publish sont idempotents).
+  durability: { retry: 10, timeout: 60 },
+
   tools: [listPending, recordResult, getStandings, fetchResults, fetchUrl, publish],
   instructions: `Tu tiens le "AI Prono Battle" de la Coupe du Monde 2026 : trois IA (Claude, GPT, Gemini)
 ont pronostiqué les 72 matchs de poule (vainqueur ou nul). Scoring : 1 point par résultat juste.

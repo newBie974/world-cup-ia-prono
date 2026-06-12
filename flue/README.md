@@ -70,6 +70,28 @@ Il n'enregistre que les matchs `finished=true`.
 
 Pour démarrer, `connect` suffit : tu vois l'agent travailler en direct.
 
+## Durabilité & sandbox (pattern « agent harness »)
+
+L'agent suit le pattern des harness d'agents modernes (cf. l'évolution de l'OpenAI Agents SDK) :
+séparation harness / compute, état externalisé, exécution sandbox-aware.
+
+- **Durable execution** — `db.ts` (au source-root) exporte un adaptateur **sqlite fichier**
+  (`./.flue-state.db`). Flue persiste l'historique de session + l'état des soumissions : un run
+  interrompu (Ctrl-C, crash, restart) est **réconcilié** au redémarrage au lieu d'être perdu.
+  La reprise est *conservatrice* : un effet externe potentiellement déjà appliqué n'est jamais
+  rejoué aveuglément — d'où des outils **idempotents** (`record_result` ré-écrit la même clé,
+  `publish` ne pousse que s'il y a un diff). `durability: { retry, timeout }` règle les tentatives.
+- **Sandbox-aware** — `sandbox: local({ cwd: REPO_ROOT })` borne le workspace bash/fs *du modèle*
+  au repo, avec l'allowlist d'env par défaut (pas d'exposition globale des secrets host).
+- **Tools = actions bornées** — les capacités privilégiées (`record_result`, `publish`, …) sont
+  des outils typés et audités, séparés de l'accès workspace brut. C'est la posture recommandée :
+  le modèle n'a pas un shell libre pour faire le travail, il passe par des actions explicites.
+
+> Mémoire en tiers : `predictions.json` = mémoire **immuable**, `results.json` = mémoire **long
+> terme** append-only, l'historique de conversation (sqlite + compaction) = **court terme**.
+
+La base `.flue-state.db*` est locale et gitignorée (pour du multi-réplica, passer à `@flue/postgres`).
+
 ## 4. One-shot / cron
 
 `flue run` cible des **workflows**, pas des agents — notre `prono-agent` se pilote donc via

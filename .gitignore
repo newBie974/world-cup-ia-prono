@@ -5,3 +5,5 @@ node_modules/
 dist/
 .env
 .dev.vars
+flue/.flue-state.db
+flue/.flue-state.db-*
