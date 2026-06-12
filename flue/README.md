@@ -13,8 +13,9 @@ flue/
 └─ .env                    ← GEMINI_API_KEY (à créer, gitignoré)
 ```
 
-Flue découvre les agents dans `agents/`. L'agent expose 3 outils :
-`list_pending`, `record_result`, `get_standings` (voir `agents/prono-agent.ts`).
+Flue découvre les agents dans `agents/`. L'agent expose 5 outils (voir `agents/prono-agent.ts`) :
+`list_pending`, `record_result`, `get_standings`, et pour l'autonomie **`fetch_results`**
+(scores réels via l'API JSON TheSportsDB) + **`fetch_url`** (secours générique, lit une page web).
 
 ## 1. Installer
 
@@ -38,11 +39,15 @@ Tu discutes avec l'agent : il appelle `list_pending` pour voir les matchs joués
 tu lui donnes (ou il recherche) les scores, il appelle `record_result`, puis `get_standings`
 te sort le classement. `data/results.json` est mis à jour — le dashboard reflète aussitôt.
 
-⚠️ **Recherche des résultats** : le modèle seul n'a pas d'accès web. Deux options :
-- **interactif** : tu colles/confirmes les scores dans la session `connect` (le plus simple) ;
-- **autonome** : ajoute un outil web (fetch/search) dans `tools` pour que l'agent récupère les
-  scores tout seul. Tant que ce n'est pas fait, l'autonomie totale n'est pas possible —
-  d'où l'intérêt du skill `/prono-recap` (lui a la recherche web de Claude Code).
+**Récupération des résultats (autonome)** : l'agent appelle `fetch_results(date)` qui interroge
+l'API **TheSportsDB** (JSON, clé de test publique gratuite `123` par défaut, ou ta propre clé via
+`SPORTSDB_KEY` dans `.env`). Les noms reviennent en anglais — l'agent les mappe vers le français.
+Il n'enregistre que les matchs `finished=true`.
+
+> ⚠️ L'API gratuite ne couvre pas toujours 100 % des matchs d'une journée. Si un match manque,
+> l'agent peut se rabattre sur `fetch_url` (une page de résultats fiable), sinon il ne l'enregistre
+> pas. Pour une couverture complète garantie, le skill `/prono-recap` (recherche web de Claude Code)
+> reste le plus fiable.
 
 ## 3. Logs & observabilité
 
@@ -81,6 +86,6 @@ Pour un déclenchement quotidien : ajoute un cron trigger Cloudflare (`triggers.
 | | Skill `/prono-recap` | Agent Flue |
 |---|---|---|
 | Déclenchement | Manuel, dans Claude Code | `connect` (interactif) / `run` (one-shot, cron) |
-| Recherche web des scores | ✅ native (Claude Code) | à câbler (outil web) sinon manuel |
+| Récupération des scores | ✅ recherche web (Claude Code), couverture complète | ✅ `fetch_results` (API TheSportsDB) + `fetch_url` en secours |
 | Idéal pour | Suivi quand tu veux | Pipeline autonome / déploiement |
 | Données + scoring | `data/*.json` + `scripts/score.py` | `data/*.json` + `lib/scoring.ts` (identique) |
