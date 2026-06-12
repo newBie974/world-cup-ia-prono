@@ -57,7 +57,9 @@
     display: flex; align-items: center; justify-content: space-between; padding: 0 16px;
   }
   @media (min-width: 768px) { header { padding: 0 48px; } }
-  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 16px; min-width: 0; flex-shrink: 1; overflow: hidden; }
+  nav.top { flex-shrink: 1; min-width: 0; }
+  .live { flex-shrink: 0; }
   .logo { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; letter-spacing: -.04em; font-size: clamp(15px, 3.5vw, 22px); }
   .logo span { background: var(--yellow); border: 2px solid var(--ink); padding: 2px 8px; display: inline-block; }
   .brand .vsub { display: none; }
