@@ -9,8 +9,12 @@
  * Lancer en local :   npx flue connect prono-agent local
  * Déployer (Cloudflare + cron trigger quotidien) : voir flue/README.md
  */
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { createAgent, defineTool, Type } from "@flue/runtime";
-import { pending, record, standings } from "../lib/scoring.js";
+import { pending, record, standings, REPO_ROOT } from "../lib/scoring.js";
+
+const exec = promisify(execFile);
 
 /** Date du jour au format YYYY-MM-DD (UTC). */
 const today = () => new Date().toISOString().slice(0, 10);
@@ -84,6 +88,34 @@ const fetchResults = defineTool({
   },
 });
 
+const publish = defineTool({
+  name: "publish",
+  description:
+    "Publie les résultats mis à jour sur GitHub (git add data/results.json + recaps/, commit, push) — c'est ce qui rafraîchit le dashboard public. À appeler UNIQUEMENT après avoir enregistré au moins un nouveau résultat via record_result. Utilise les identifiants Git de la machine.",
+  parameters: Type.Object({
+    message: Type.Optional(Type.String({ description: "Message de commit (optionnel)" })),
+  }),
+  execute: async ({ message }) => {
+    const cwd = REPO_ROOT;
+    await exec("git", ["add", "data/results.json", "recaps"], { cwd });
+    try {
+      // exit 0 = rien d'indexé → rien à publier
+      await exec("git", ["diff", "--cached", "--quiet"], { cwd });
+      return "Rien à publier : aucun changement à committer.";
+    } catch {
+      // exit != 0 = il y a des changements indexés → on publie
+    }
+    const msg = (message as string) || "data: maj résultats (agent Flue)";
+    await exec("git", ["commit", "-m", msg], { cwd });
+    try {
+      await exec("git", ["push"], { cwd });
+    } catch (e: any) {
+      throw new Error("Commit fait mais push échoué : " + (e.stderr || e.message));
+    }
+    return `Publié sur GitHub ✅ (commit: "${msg}"). Le dashboard se rafraîchit sous ~1 min.`;
+  },
+});
+
 const fetchUrl = defineTool({
   name: "fetch_url",
   description:
@@ -114,7 +146,7 @@ export default createAgent(() => ({
   // gemini-2.5-pro exige un projet Google avec facturation (sinon 429 "limit: 0").
   // Catalogue des ids : https://pi.dev/docs/latest/providers
   model: "google/gemini-2.5-flash",
-  tools: [listPending, recordResult, getStandings, fetchResults, fetchUrl],
+  tools: [listPending, recordResult, getStandings, fetchResults, fetchUrl, publish],
   instructions: `Tu tiens le "AI Prono Battle" de la Coupe du Monde 2026 : trois IA (Claude, GPT, Gemini)
 ont pronostiqué les 72 matchs de poule (vainqueur ou nul). Scoring : 1 point par résultat juste.
 
@@ -128,7 +160,9 @@ ont pronostiqué les 72 matchs de poule (vainqueur ou nul). Scoring : 1 point pa
    vérifier via fetch_url sur une source fiable, sinon ne l'enregistre pas.)
 4. Pour chaque résultat confirmé, appelle record_result avec le vainqueur (orthographe canonique
    EXACTE renvoyée par list_pending, ou 'Nul' si match nul) et le score "X-Y".
-5. Appelle get_standings et produis un récap en français : classement à jour, qui mène, séries,
+5. Si tu as enregistré AU MOINS UN nouveau résultat à l'étape 4, appelle publish pour mettre le
+   dashboard public à jour (sinon, n'appelle pas publish : rien à publier).
+6. Appelle get_standings et produis un récap en français : classement à jour, qui mène, séries,
    pronostics audacieux qui ont payé ou raté, gros matchs du lendemain.
 
 Sois factuel : ne devine jamais un résultat, vérifie-le. En cas de doute sur un score, n'enregistre pas le match.`,

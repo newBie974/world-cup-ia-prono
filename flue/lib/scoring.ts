@@ -10,6 +10,9 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const PRED = join(ROOT, "data", "predictions.json");
 const RES = join(ROOT, "data", "results.json");
 
+/** Racine du repo (là où vivent data/, recaps/, .git). */
+export const REPO_ROOT = ROOT;
+
 export const AIS = ["claude", "gpt", "gemini"] as const;
 export type Ai = (typeof AIS)[number];
 

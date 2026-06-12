@@ -13,9 +13,10 @@ flue/
 └─ .env                    ← GEMINI_API_KEY (à créer, gitignoré)
 ```
 
-Flue découvre les agents dans `agents/`. L'agent expose 5 outils (voir `agents/prono-agent.ts`) :
-`list_pending`, `record_result`, `get_standings`, et pour l'autonomie **`fetch_results`**
-(scores réels via l'API JSON TheSportsDB) + **`fetch_url`** (secours générique, lit une page web).
+Flue découvre les agents dans `agents/`. L'agent expose 6 outils (voir `agents/prono-agent.ts`) :
+`list_pending`, `record_result`, `get_standings`, **`fetch_results`** (scores réels via l'API JSON
+TheSportsDB), **`fetch_url`** (secours générique), et **`publish`** (git add/commit/push de
+`data/results.json` → rafraîchit le dashboard ; utilise les identifiants Git de la machine).
 
 > ⚠️ **Piège de nom à connaître.** Le CLI s'appelle `@flue/cli` (scopé). Le paquet npm
 > **non-scopé `flue`** est un squatteur sans rapport (un "Firebase search utility").
