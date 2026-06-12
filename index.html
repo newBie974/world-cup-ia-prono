@@ -272,9 +272,13 @@ const PLACE = ["1er place", "2e place", "3e place"];
 const MEDAL = ["🥇", "🥈", "🥉"];
 
 async function load() {
+  // anti-cache : results.json change à chaque journée, on force la version fraîche
+  // (le cache navigateur + CDN GitHub Pages servent sinon une vieille copie).
+  const bust = `?t=${Date.now()}`;
+  const opts = { cache: "no-store" };
   const [pred, res] = await Promise.all([
-    fetch("data/predictions.json").then(r => r.json()),
-    fetch("data/results.json").then(r => r.json()),
+    fetch("data/predictions.json", opts).then(r => r.json()),
+    fetch("data/results.json" + bust, opts).then(r => r.json()),
   ]);
   return { matches: pred.matches, results: res.results || {}, updated: res.last_updated };
 }
