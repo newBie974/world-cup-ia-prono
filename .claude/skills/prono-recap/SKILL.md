@@ -17,6 +17,8 @@ correspond au résultat réel). Pas de bonus score exact.
 - `scripts/score.py` — scoring déterministe (classement + focus du jour + liste des matchs en attente).
 - `recaps/AAAA-MM-JJ.md` — récap écrit à chaque run.
 - `index.html` — dashboard public (lit les 2 JSON, rien à régénérer ; déployé via GitHub Pages).
+- `scripts/og_card.py` — régénère `og.png` (carte du classement) ; lit predictions+results.
+- `social/AAAA-MM-JJ.md` — texte de post prêt à publier (écrit à chaque run avec du nouveau).
 
 ## Procédure
 
@@ -42,14 +44,31 @@ correspond au résultat réel). Pas de bonus score exact.
    ```
    python3 scripts/score.py --date <AAAA-MM-JJ>
    ```
-   Coller la sortie Markdown dans `recaps/<AAAA-MM-JJ>.md` (en-tête + classement général + focus du jour).
-   Ajouter 2-3 phrases d'analyse : qui a pris la tête, série en cours, pronos audacieux qui ont payé/raté,
-   gros matchs à venir le lendemain.
+   Coller la sortie Markdown dans `recaps/<AAAA-MM-JJ>.md` + 2-3 phrases d'analyse.
 
-6. **Classement seul** (si l'utilisateur veut juste l'état actuel sans rien récupérer) :
-   `python3 scripts/score.py` et résume.
+6. **Régénérer l'image OG** :
+   ```
+   python3 scripts/og_card.py
+   ```
+   Si la commande échoue (Pillow/police absents), le noter et continuer sans bloquer.
 
-7. **Restituer** à l'utilisateur : classement à jour + faits marquants du jour. Concis, en français.
+7. **Écrire le texte de post** dans `social/<AAAA-MM-JJ>.md` : 4-6 lignes en français, prêtes
+   à copier-coller — classement à jour (Claude/GPT/Gemini), 1-2 faits marquants du jour, le
+   lien `https://newbie974.github.io/world-cup-ia-prono/`, et 3-4 hashtags
+   (#AI #LLM #WorldCup2026). Pas de publication : on génère seulement l'asset.
+
+8. **Publier** : committer et pousser tous les changements :
+   ```
+   git add data/results.json recaps/ og.png social/
+   git commit -m "data: maj résultats <date> + recap + assets sociaux"
+   git push
+   ```
+   S'il n'y a aucun nouveau match (rien de neuf), ne rien committer.
+
+9. **Restituer** à l'utilisateur : classement à jour + faits marquants. Concis, en français.
+
+> **Classement seul** (si l'utilisateur veut juste l'état actuel sans rien récupérer) :
+> `python3 scripts/score.py` et résume.
 
 ## Notes
 
