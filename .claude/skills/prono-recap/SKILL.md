@@ -44,7 +44,10 @@ correspond au résultat réel). Pas de bonus score exact.
    ```
    python3 scripts/score.py --date <AAAA-MM-JJ>
    ```
-   Coller la sortie Markdown dans `recaps/<AAAA-MM-JJ>.md` + 2-3 phrases d'analyse.
+   Coller la sortie Markdown dans `recaps/<AAAA-MM-JJ>.md` + 2-3 phrases d'analyse (sous un titre
+   `## Analyse`, en bullets — c'est cette section qui s'affiche sur le dashboard).
+   Copier ensuite ce même récap dans `recaps/latest.md` (le dashboard lit ce fichier) :
+   `cp recaps/<AAAA-MM-JJ>.md recaps/latest.md`.
 
 6. **Régénérer l'image OG** :
    ```

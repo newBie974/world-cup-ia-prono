@@ -183,6 +183,20 @@
   .empty .big { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 26px; }
   .empty .pill { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 15px; background: var(--yellow); border: 2px solid var(--ink); padding: 4px 12px; }
 
+  /* ---------- Récap du jour ---------- */
+  .recap { background: var(--paper); padding: 32px; margin-bottom: 24px; }
+  .recap h3 { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 24px; display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .recap h3 .ico { background: var(--yellow); border: 2px solid var(--ink); padding: 7px; display: inline-flex; }
+  .recap-body h3 { font-size: 17px; margin: 16px 0 8px; }
+  .recap-body h4 { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 15px; margin: 14px 0 6px; }
+  .recap-body p { font-weight: 600; font-size: 16px; line-height: 1.6; margin: 8px 0; max-width: 72ch; }
+  .recap-body ul { list-style: none; margin: 4px 0; padding: 0; }
+  .recap-body li { font-weight: 600; font-size: 16px; line-height: 1.6; padding: 6px 0 6px 22px; position: relative; max-width: 72ch; border-bottom: 2px solid var(--dim); }
+  .recap-body li:last-child { border-bottom: none; }
+  .recap-body li::before { content: "▸"; position: absolute; left: 0; font-weight: 900; }
+  .recap-body strong { background: var(--yellow); padding: 0 3px; }
+  .recap-body .rmuted { opacity: .6; font-style: italic; font-weight: 500; font-size: 14px; }
+
   /* ---------- Methodology ---------- */
   .method { background: var(--paper); padding: 36px; margin-bottom: 24px; }
   .method h3 { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 26px; display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
@@ -259,6 +273,11 @@
       </thead>
       <tbody id="rows"></tbody>
     </table>
+  </section>
+
+  <section class="recap neo" id="recap" hidden>
+    <h3><span class="ico material-symbols-outlined">article</span> Récap du jour</h3>
+    <div class="recap-body" id="recapBody"></div>
   </section>
 
   <section class="method neo" id="method">
@@ -400,6 +419,63 @@ function flagImg(team) {
   return `<img class="flag" src="https://flagcdn.com/w40/${code}.png" srcset="https://flagcdn.com/w80/${code}.png 2x" alt="" loading="lazy" width="22" height="16" />`;
 }
 
+// ---------- Récap du jour (mini-markdown, sous-ensemble contrôlé) ----------
+function mdInline(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+}
+
+function renderRecapMarkdown(md) {
+  let lines = md.split("\n");
+  // garder uniquement la section "## Analyse" si présente (le narratif ; les tableaux
+  // sont déjà couverts par le podium + la table).
+  const start = lines.findIndex(l => /^##\s+Analyse/i.test(l.trim()));
+  if (start >= 0) {
+    const end = lines.findIndex((l, i) => i > start && /^##\s/.test(l.trim()));
+    lines = lines.slice(start + 1, end < 0 ? undefined : end);
+  }
+  // Parser à buffer : les bullets/paragraphes peuvent être wrappés sur plusieurs lignes
+  // (retours à la ligne « doux »). On fusionne les lignes de continuation avant rendu,
+  // sinon un **gras** à cheval sur deux lignes ne se ferme pas.
+  const out = [];
+  let inList = false, buf = null, type = null;
+  const closeList = () => { if (inList) { out.push("</ul>"); inList = false; } };
+  const flush = () => {
+    if (buf === null) return;
+    const html = mdInline(buf.trim());
+    if (type === "li") { if (!inList) { out.push("<ul>"); inList = true; } out.push(`<li>${html}</li>`); }
+    else if (type === "h4") { closeList(); out.push(`<h4>${html}</h4>`); }
+    else if (type === "h3") { closeList(); out.push(`<h3>${html}</h3>`); }
+    else if (type === "muted") { closeList(); out.push(`<p class="rmuted">${html}</p>`); }
+    else { closeList(); out.push(`<p>${html}</p>`); }
+    buf = null; type = null;
+  };
+  for (const raw of lines) {
+    const l = raw.trim();
+    if (!l || l.startsWith("|") || /^-{3,}$/.test(l)) { flush(); closeList(); continue; }
+    if (l.startsWith("# ") && !l.startsWith("## ")) { flush(); continue; }
+    if (l.startsWith("### ")) { flush(); buf = l.slice(4); type = "h4"; flush(); continue; }
+    if (l.startsWith("## ")) { flush(); buf = l.slice(3); type = "h3"; flush(); continue; }
+    if (l.startsWith("- ")) { flush(); buf = l.slice(2); type = "li"; continue; }
+    if (/^_.*_$/.test(l)) { flush(); buf = l.replace(/^_|_$/g, ""); type = "muted"; flush(); continue; }
+    if (buf !== null) { buf += " " + l; }       // ligne de continuation
+    else { buf = l; type = "p"; }
+  }
+  flush(); closeList();
+  return out.join("");
+}
+
+async function loadRecap() {
+  try {
+    const r = await fetch("recaps/latest.md?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) return;
+    const html = renderRecapMarkdown(await r.text());
+    if (!html.trim()) return;
+    document.getElementById("recapBody").innerHTML = html;
+    document.getElementById("recap").hidden = false;
+  } catch (e) { /* pas de récap dispo → section masquée */ }
+}
+
 function rowHtml(r) {
   const result = r.actual
     ? `<span class="result">${r.actual.winner}${r.actual.score ? `<span class="score">${r.actual.score}</span>` : ""}</span>`
@@ -487,6 +563,7 @@ function pickDefaultDate() {
   renderPodium(state.totals);
   buildDaystrip(state.rows);
   renderDay(state.rows);
+  loadRecap();
   document.getElementById("group").addEventListener("change", () => renderDay(state.rows));
   document.getElementById("jumpToday").addEventListener("click", (e) => {
     e.preventDefault();
