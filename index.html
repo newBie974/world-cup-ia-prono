@@ -111,6 +111,30 @@
   .rule-badge .material-symbols-outlined { font-size: 16px; }
   .count { font-family: "Montserrat"; font-weight: 800; font-size: 12px; text-transform: uppercase; opacity: .7; }
 
+  /* ---------- Calendrier (vue daily) ---------- */
+  .daystrip { display: flex; gap: 10px; overflow-x: auto; padding: 4px; scrollbar-width: thin; }
+  .daychip {
+    flex: 0 0 auto; min-width: 64px; background: var(--paper); border: var(--border); box-shadow: var(--shadow-sm);
+    padding: 8px 10px; text-align: center; cursor: pointer; transition: transform .08s ease, box-shadow .08s ease;
+    font-family: "Montserrat"; line-height: 1.15;
+  }
+  .daychip:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 var(--ink); }
+  .daychip .dow { display: block; font-weight: 700; font-size: 10px; text-transform: uppercase; opacity: .6; }
+  .daychip .dnum { display: block; font-weight: 900; font-size: 20px; }
+  .daychip .dmon { display: block; font-weight: 700; font-size: 9px; text-transform: uppercase; opacity: .6; }
+  .daychip .ddot { display: block; height: 5px; width: 5px; border-radius: 50%; margin: 3px auto 0; background: transparent; }
+  .daychip.played .ddot { background: var(--ink); }      /* journée terminée */
+  .daychip.today { background: var(--yellow); }
+  .daychip.active { background: var(--ink); color: var(--paper); }
+  .daychip.active .dow, .daychip.active .dmon { opacity: .8; }
+  .daychip.active .ddot { background: var(--paper); }
+  .daychip.all { min-width: 76px; display: flex; flex-direction: column; justify-content: center; font-weight: 900; text-transform: uppercase; font-size: 12px; }
+
+  .dayhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin: 28px 0 16px; }
+  .daytitle { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; font-size: clamp(20px, 4vw, 28px); }
+  .daytitle .cnt { font-size: 14px; opacity: .55; margin-left: 8px; }
+  .dayctrl { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
   /* ---------- Table ---------- */
   .table-wrap { overflow-x: auto; margin-bottom: 48px; }
   table { width: 100%; border-collapse: collapse; min-width: 640px; }
@@ -194,26 +218,20 @@
 
   <section class="podium" id="podium"></section>
 
-  <section class="controls neo">
-    <div class="selects">
+  <section class="controls neo" style="padding:14px">
+    <div class="daystrip" id="daystrip"></div>
+  </section>
+
+  <div class="dayhead">
+    <h2 class="daytitle" id="dayTitle"></h2>
+    <div class="dayctrl">
       <div class="sel">
         <select id="group"><option value="">Tous les groupes</option></select>
         <span class="material-symbols-outlined">expand_more</span>
       </div>
-      <div class="sel">
-        <select id="filter">
-          <option value="all">Tous les matchs (72)</option>
-          <option value="played">Matchs joués</option>
-          <option value="upcoming">À venir</option>
-        </select>
-        <span class="material-symbols-outlined">expand_more</span>
-      </div>
+      <span class="rule-badge"><span class="material-symbols-outlined">info</span> 1 pt / résultat juste</span>
     </div>
-    <div style="display:flex;align-items:center;gap:14px">
-      <span class="count" id="count"></span>
-      <span class="rule-badge"><span class="material-symbols-outlined">info</span> 1 point par résultat juste</span>
-    </div>
-  </section>
+  </div>
 
   <section class="table-wrap">
     <table>
@@ -259,7 +277,7 @@
   <a href="#top"><span class="material-symbols-outlined">home</span>Home</a>
   <a href="#top"><span class="material-symbols-outlined">sports_soccer</span>Battle</a>
   <a href="#podium"><span class="material-symbols-outlined">leaderboard</span>Rank</a>
-  <a href="#" id="cycleFilter"><span class="material-symbols-outlined">tune</span>Filtre</a>
+  <a href="#" id="jumpToday"><span class="material-symbols-outlined">today</span>Jour</a>
 </nav>
 
 <script>
@@ -331,41 +349,89 @@ function predCell(ai, pick, hit) {
   return `<td class="c ${ai}"><span class="${cls}">${mk}<span class="lbl">${lbl}</span></span></td>`;
 }
 
-function renderTable(rows) {
-  const group = document.getElementById("group").value;
-  const filter = document.getElementById("filter").value;
-  let view = rows;
-  if (group) view = view.filter(r => r.group === group);
-  if (filter === "played") view = view.filter(r => r.actual);
-  else if (filter === "upcoming") view = view.filter(r => !r.actual);
+// ---------- Vue calendrier / daily ----------
+const DOW = ["DIM", "LUN", "MAR", "MER", "JEU", "VEN", "SAM"];
+const MON = ["JANV", "FÉVR", "MARS", "AVR", "MAI", "JUIN", "JUIL", "AOÛT", "SEPT", "OCT", "NOV", "DÉC"];
+const DOW_LONG = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+const MON_LONG = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+const todayISO = () => new Date().toISOString().slice(0, 10);
+const utc = iso => new Date(iso + "T00:00:00Z");
 
-  document.getElementById("count").textContent = `${view.length} match${view.length > 1 ? "s" : ""}`;
-  const tbody = document.getElementById("rows");
+let DATES = [];
+let selectedDate = null; // ISO ou "all"
 
-  if (!view.length) {
-    tbody.innerHTML = `<tr class="empty"><td colspan="5"><div class="box">
-      <div class="ball"><span class="material-symbols-outlined">sports_soccer</span></div>
-      <div class="big">Aucun match ici pour l'instant.</div>
-      <div class="pill">Reviens après le coup d'envoi ! ⚽</div>
-    </div></td></tr>`;
-    return;
-  }
+const dayIsPlayed = (rows, iso) => {
+  const d = rows.filter(r => r.date === iso);
+  return d.length > 0 && d.every(r => r.actual);
+};
 
-  tbody.innerHTML = view.map(r => {
-    const result = r.actual
-      ? `<span class="result">${r.actual.winner}${r.actual.score ? `<span class="score">${r.actual.score}</span>` : ""}</span>`
-      : `<span class="date">${r.date.slice(5).replace("-", "/")}</span>`;
-    return `<tr>
-      <td><div class="matchcell">
-        <span class="grp">${r.group}</span>
-        <span class="team">${r.home}</span><span class="vs">VS</span><span class="team">${r.away}</span>
-      </div></td>
-      <td class="c">${result}</td>
-      ${predCell("claude", r.pred.claude, r.actual ? r.hits.claude : null)}
-      ${predCell("gpt", r.pred.gpt, r.actual ? r.hits.gpt : null)}
-      ${predCell("gemini", r.pred.gemini, r.actual ? r.hits.gemini : null)}
-    </tr>`;
+function rowHtml(r) {
+  const result = r.actual
+    ? `<span class="result">${r.actual.winner}${r.actual.score ? `<span class="score">${r.actual.score}</span>` : ""}</span>`
+    : `<span class="date">à venir</span>`;
+  return `<tr>
+    <td><div class="matchcell">
+      <span class="grp">${r.group}</span>
+      <span class="team">${r.home}</span><span class="vs">VS</span><span class="team">${r.away}</span>
+    </div></td>
+    <td class="c">${result}</td>
+    ${predCell("claude", r.pred.claude, r.actual ? r.hits.claude : null)}
+    ${predCell("gpt", r.pred.gpt, r.actual ? r.hits.gpt : null)}
+    ${predCell("gemini", r.pred.gemini, r.actual ? r.hits.gemini : null)}
+  </tr>`;
+}
+
+function buildDaystrip(rows) {
+  const today = todayISO();
+  const chips = DATES.map(iso => {
+    const cls = ["daychip", dayIsPlayed(rows, iso) ? "played" : "", iso === today ? "today" : ""].filter(Boolean).join(" ");
+    return `<button class="${cls}" data-date="${iso}">
+      <span class="dow">${DOW[utc(iso).getUTCDay()]}</span>
+      <span class="dnum">${iso.slice(8, 10)}</span>
+      <span class="dmon">${MON[utc(iso).getUTCMonth()]}</span>
+      <span class="ddot"></span>
+    </button>`;
   }).join("");
+  const all = `<button class="daychip all" data-date="all">Tous les jours</button>`;
+  const strip = document.getElementById("daystrip");
+  strip.innerHTML = chips + all;
+  strip.querySelectorAll(".daychip").forEach(btn =>
+    btn.addEventListener("click", () => { selectedDate = btn.dataset.date; renderDay(rows); }));
+}
+
+function dayLabel(iso) {
+  const d = utc(iso);
+  return `${DOW_LONG[d.getUTCDay()]} ${parseInt(iso.slice(8, 10), 10)} ${MON_LONG[d.getUTCMonth()]}`;
+}
+
+function renderDay(rows) {
+  const group = document.getElementById("group").value;
+  let view = rows;
+  if (selectedDate !== "all") view = view.filter(r => r.date === selectedDate);
+  if (group) view = view.filter(r => r.group === group);
+
+  const title = selectedDate === "all" ? "Tous les matchs" : dayLabel(selectedDate);
+  document.getElementById("dayTitle").innerHTML =
+    `${title}<span class="cnt">${view.length} match${view.length > 1 ? "s" : ""}</span>`;
+
+  document.querySelectorAll(".daychip").forEach(b => b.classList.toggle("active", b.dataset.date === selectedDate));
+  const active = document.querySelector(".daychip.active");
+  if (active) active.scrollIntoView({ inline: "center", block: "nearest" });
+
+  const tbody = document.getElementById("rows");
+  tbody.innerHTML = view.length ? view.map(rowHtml).join("")
+    : `<tr class="empty"><td colspan="5"><div class="box">
+        <div class="ball"><span class="material-symbols-outlined">sports_soccer</span></div>
+        <div class="big">Aucun match ce jour-là.</div>
+        <div class="pill">Choisis une autre date ⚽</div>
+      </div></td></tr>`;
+}
+
+function pickDefaultDate() {
+  const t = todayISO();
+  if (DATES.includes(t)) return t;
+  const upcoming = DATES.filter(d => d >= t);
+  return upcoming[0] || DATES[DATES.length - 1];
 }
 
 (async function init() {
@@ -373,6 +439,8 @@ function renderTable(rows) {
   try {
     const { matches, results } = await load();
     state = compute(matches, results);
+    DATES = [...new Set(matches.map(m => m.date))].sort();
+    selectedDate = pickDefaultDate();
     const groups = [...new Set(matches.map(m => m.group))].sort();
     document.getElementById("group").insertAdjacentHTML("beforeend",
       groups.map(g => `<option value="${g}">Groupe ${g}</option>`).join(""));
@@ -382,16 +450,14 @@ function renderTable(rows) {
     return;
   }
   renderPodium(state.totals);
-  renderTable(state.rows);
-  const rerender = () => renderTable(state.rows);
-  document.getElementById("group").addEventListener("change", rerender);
-  document.getElementById("filter").addEventListener("change", rerender);
-  // bouton filtre mobile : cycle entre les modes
-  document.getElementById("cycleFilter").addEventListener("click", (e) => {
+  buildDaystrip(state.rows);
+  renderDay(state.rows);
+  document.getElementById("group").addEventListener("change", () => renderDay(state.rows));
+  document.getElementById("jumpToday").addEventListener("click", (e) => {
     e.preventDefault();
-    const f = document.getElementById("filter");
-    f.selectedIndex = (f.selectedIndex + 1) % f.options.length;
-    rerender();
+    selectedDate = pickDefaultDate();
+    renderDay(state.rows);
+    document.querySelector(".controls").scrollIntoView({ behavior: "smooth", block: "start" });
   });
 })();
 </script>
