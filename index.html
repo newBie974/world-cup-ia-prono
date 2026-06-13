@@ -157,6 +157,8 @@
   tbody td { padding: 16px 18px; border: var(--border); background: var(--paper); font-weight: 700; vertical-align: middle; }
   tbody td.c { text-align: center; }
   .matchcell { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .side { display: inline-flex; align-items: center; gap: 7px; }
+  .flag { width: 22px; height: 16px; object-fit: cover; border: 2px solid var(--ink); flex: 0 0 auto; display: block; }
   .grp { font-family: "Montserrat"; font-weight: 900; font-size: 11px; background: var(--yellow); border: 2px solid var(--ink); padding: 2px 6px; }
   .team { font-family: "Montserrat"; font-weight: 800; text-transform: uppercase; font-size: 13px; background: var(--ink); color: var(--paper); padding: 3px 8px; white-space: nowrap; }
   .vs { font-family: "Montserrat"; font-weight: 900; font-size: 18px; }
@@ -376,6 +378,28 @@ const dayIsPlayed = (rows, iso) => {
   return d.length > 0 && d.every(r => r.actual);
 };
 
+// Équipe canonique (FR) -> code ISO flagcdn (gb-eng/gb-sct pour Angleterre/Écosse).
+const FLAGS = {
+  "Mexique": "mx", "Afrique du Sud": "za", "Corée du Sud": "kr", "Tchéquie": "cz",
+  "Canada": "ca", "Bosnie": "ba", "Qatar": "qa", "Suisse": "ch",
+  "Brésil": "br", "Maroc": "ma", "Haïti": "ht", "Écosse": "gb-sct",
+  "États-Unis": "us", "Paraguay": "py", "Australie": "au", "Turquie": "tr",
+  "Allemagne": "de", "Curaçao": "cw", "Côte d'Ivoire": "ci", "Équateur": "ec",
+  "Pays-Bas": "nl", "Japon": "jp", "Suède": "se", "Tunisie": "tn",
+  "Belgique": "be", "Égypte": "eg", "Iran": "ir", "Nouvelle-Zélande": "nz",
+  "Espagne": "es", "Cap-Vert": "cv", "Arabie saoudite": "sa", "Uruguay": "uy",
+  "France": "fr", "Sénégal": "sn", "Irak": "iq", "Norvège": "no",
+  "Argentine": "ar", "Algérie": "dz", "Autriche": "at", "Jordanie": "jo",
+  "Portugal": "pt", "RD Congo": "cd", "Ouzbékistan": "uz", "Colombie": "co",
+  "Angleterre": "gb-eng", "Croatie": "hr", "Ghana": "gh", "Panama": "pa",
+};
+
+function flagImg(team) {
+  const code = FLAGS[team];
+  if (!code) return "";
+  return `<img class="flag" src="https://flagcdn.com/w40/${code}.png" srcset="https://flagcdn.com/w80/${code}.png 2x" alt="" loading="lazy" width="22" height="16" />`;
+}
+
 function rowHtml(r) {
   const result = r.actual
     ? `<span class="result">${r.actual.winner}${r.actual.score ? `<span class="score">${r.actual.score}</span>` : ""}</span>`
@@ -383,7 +407,7 @@ function rowHtml(r) {
   return `<tr>
     <td><div class="matchcell">
       <span class="grp">${r.group}</span>
-      <span class="team">${r.home}</span><span class="vs">VS</span><span class="team">${r.away}</span>
+      <span class="side">${flagImg(r.home)}<span class="team">${r.home}</span></span><span class="vs">VS</span><span class="side">${flagImg(r.away)}<span class="team">${r.away}</span></span>
     </div></td>
     <td class="c">${result}</td>
     ${predCell("claude", r.pred.claude, r.actual ? r.hits.claude : null)}
