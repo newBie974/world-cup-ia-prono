@@ -1,10 +1,14 @@
 {
   "_comment": "État persistant (la mémoire). À chaque run, /prono-recap ajoute ici les vrais résultats des matchs joués. winner = nom d'équipe canonique (voir predictions.json) ou 'Nul'. score optionnel (ex '2-1').",
-  "last_updated": "2026-06-13",
+  "last_updated": "2026-06-14",
   "results": {
     "1": { "winner": "Mexique", "score": "2-0" },
     "2": { "winner": "Corée du Sud", "score": "2-1" },
     "7": { "winner": "Nul", "score": "1-1" },
-    "19": { "winner": "États-Unis", "score": "4-1" }
+    "8": { "winner": "Nul", "score": "1-1" },
+    "13": { "winner": "Nul", "score": "1-1" },
+    "14": { "winner": "Écosse", "score": "0-1" },
+    "19": { "winner": "États-Unis", "score": "4-1" },
+    "20": { "winner": "Australie", "score": "2-0" }
   }
 }
