@@ -6,7 +6,7 @@
     { "id": 1,  "group": "A", "date": "2026-06-11", "home": "Mexique", "away": "Afrique du Sud", "pred": { "claude": "Mexique", "gpt": "Mexique", "gemini": "Mexique" } },
     { "id": 2,  "group": "A", "date": "2026-06-11", "home": "Corée du Sud", "away": "Tchéquie", "pred": { "claude": "Nul", "gpt": "Nul", "gemini": "Nul" } },
     { "id": 3,  "group": "A", "date": "2026-06-18", "home": "Tchéquie", "away": "Afrique du Sud", "pred": { "claude": "Tchéquie", "gpt": "Tchéquie", "gemini": "Tchéquie" } },
-    { "id": 4,  "group": "A", "date": "2026-06-18", "home": "Mexique", "away": "Corée du Sud", "pred": { "claude": "Mexique", "gpt": "Nul", "gemini": "Mexique" } },
+    { "id": 4,  "group": "A", "date": "2026-06-18", "home": "Mexique", "away": "Corée du Sud", "pred": { "claude": "Mexique", "gpt": "Mexique", "gemini": "Nul" } },
     { "id": 5,  "group": "A", "date": "2026-06-24", "home": "Tchéquie", "away": "Mexique", "pred": { "claude": "Nul", "gpt": "Mexique", "gemini": "Nul" } },
     { "id": 6,  "group": "A", "date": "2026-06-24", "home": "Afrique du Sud", "away": "Corée du Sud", "pred": { "claude": "Corée du Sud", "gpt": "Corée du Sud", "gemini": "Corée du Sud" } },
 
@@ -26,8 +26,8 @@
 
     { "id": 19, "group": "D", "date": "2026-06-12", "home": "États-Unis", "away": "Paraguay", "pred": { "claude": "États-Unis", "gpt": "États-Unis", "gemini": "États-Unis" } },
     { "id": 20, "group": "D", "date": "2026-06-13", "home": "Australie", "away": "Turquie", "pred": { "claude": "Turquie", "gpt": "Turquie", "gemini": "Nul" } },
-    { "id": 21, "group": "D", "date": "2026-06-19", "home": "États-Unis", "away": "Australie", "pred": { "claude": "États-Unis", "gpt": "États-Unis", "gemini": "États-Unis" } },
-    { "id": 22, "group": "D", "date": "2026-06-19", "home": "Turquie", "away": "Paraguay", "pred": { "claude": "Nul", "gpt": "Nul", "gemini": "Turquie" } },
+    { "id": 21, "group": "D", "date": "2026-06-19", "home": "États-Unis", "away": "Australie", "pred": { "claude": "États-Unis", "gpt": "États-Unis", "gemini": "Nul" } },
+    { "id": 22, "group": "D", "date": "2026-06-19", "home": "Turquie", "away": "Paraguay", "pred": { "claude": "Turquie", "gpt": "Turquie", "gemini": "Turquie" } },
     { "id": 23, "group": "D", "date": "2026-06-25", "home": "Turquie", "away": "États-Unis", "pred": { "claude": "Nul", "gpt": "Nul", "gemini": "Nul" } },
     { "id": 24, "group": "D", "date": "2026-06-25", "home": "Paraguay", "away": "Australie", "pred": { "claude": "Paraguay", "gpt": "Paraguay", "gemini": "Australie" } },
 
@@ -62,7 +62,7 @@
     { "id": 49, "group": "I", "date": "2026-06-16", "home": "France", "away": "Sénégal", "pred": { "claude": "France", "gpt": "France", "gemini": "France" } },
     { "id": 50, "group": "I", "date": "2026-06-16", "home": "Irak", "away": "Norvège", "pred": { "claude": "Norvège", "gpt": "Norvège", "gemini": "Norvège" } },
     { "id": 51, "group": "I", "date": "2026-06-22", "home": "France", "away": "Irak", "pred": { "claude": "France", "gpt": "France", "gemini": "France" } },
-    { "id": 52, "group": "I", "date": "2026-06-22", "home": "Norvège", "away": "Sénégal", "pred": { "claude": "Nul", "gpt": "Nul", "gemini": "Nul" } },
+    { "id": 52, "group": "I", "date": "2026-06-22", "home": "Norvège", "away": "Sénégal", "pred": { "claude": "Norvège", "gpt": "Norvège", "gemini": "Nul" } },
     { "id": 53, "group": "I", "date": "2026-06-26", "home": "Norvège", "away": "France", "pred": { "claude": "Nul", "gpt": "France", "gemini": "France" } },
     { "id": 54, "group": "I", "date": "2026-06-26", "home": "Sénégal", "away": "Irak", "pred": { "claude": "Sénégal", "gpt": "Sénégal", "gemini": "Sénégal" } },
 

@@ -283,11 +283,17 @@
   <section class="method neo" id="method">
     <h3><span class="ico material-symbols-outlined">analytics</span> Méthodologie du Battle</h3>
     <p>
-      Les pronostics des trois IA sont <mark>figés avant le coup d'envoi</mark> de la compétition.
-      Chaque IA a pronostiqué les <strong>72 matchs de poule</strong> (vainqueur ou nul). Le classement
-      se met à jour dès qu'un score final est enregistré : <strong>1 point par résultat juste</strong>,
-      sans bonus de score exact (pour rester équitable entre les trois). Données : pronostics
-      d'origine + résultats officiels FIFA.
+      Chaque IA a d'abord pronostiqué les <strong>72 matchs de poule</strong> <mark>à l'aveugle</mark>
+      (vainqueur ou nul), avant le coup d'envoi. Le classement se met à jour dès qu'un score final est
+      enregistré : <strong>1 point par résultat juste</strong>, sans bonus de score exact (pour rester
+      équitable entre les trois). Données : pronostics + résultats officiels FIFA.
+    </p>
+    <p>
+      🔄 <strong>Seconde chance mi-parcours.</strong> À l'issue de la <strong>journée 1</strong>, on a
+      transmis aux trois IA les vrais résultats et on les a laissées <strong>réviser leurs pronostics
+      de la journée 2</strong> en tenant compte des tendances. Bilan : elles ont très peu bougé —
+      <strong>seulement 4 matchs sur 24</strong> modifiés. Les journées 1 et 3 restent sur les
+      pronostics d'origine.
     </p>
   </section>
 
@@ -296,7 +302,7 @@
 <footer>
   <div class="foot">
     <div class="flogo">AI Prono Battle</div>
-    <p>© 2026 AI Prono Battle — la guerre des IA sur la Coupe du Monde, en temps réel. Pronostics figés des 3 IA + résultats réels saisis au fil des matchs.</p>
+    <p>© 2026 AI Prono Battle — la guerre des IA sur la Coupe du Monde, en temps réel. Pronostics des 3 IA (révisés une fois à mi-parcours) + résultats réels saisis au fil des matchs.</p>
     <div class="links">
       <a href="https://github.com/newBie974/world-cup-ia-prono" target="_blank" rel="noopener">Code source</a>
       <a href="#method">Méthodologie</a>
