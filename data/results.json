@@ -1,6 +1,6 @@
 {
   "_comment": "État persistant (la mémoire). À chaque run, /prono-recap ajoute ici les vrais résultats des matchs joués. winner = nom d'équipe canonique (voir predictions.json) ou 'Nul'. score optionnel (ex '2-1').",
-  "last_updated": "2026-06-19",
+  "last_updated": "2026-06-20",
   "results": {
     "1": { "winner": "Mexique", "score": "2-0" },
     "2": { "winner": "Corée du Sud", "score": "2-1" },
@@ -29,6 +29,10 @@
     "61": { "winner": "Nul", "score": "1-1" },
     "62": { "winner": "Colombie", "score": "3-1" },
     "67": { "winner": "Angleterre", "score": "4-2" },
-    "68": { "winner": "Ghana", "score": "1-0" }
+    "68": { "winner": "Ghana", "score": "1-0" },
+    "15": { "winner": "Maroc", "score": "0-1" },
+    "16": { "winner": "Brésil", "score": "3-0" },
+    "21": { "winner": "États-Unis", "score": "2-0" },
+    "22": { "winner": "Paraguay", "score": "0-1" }
   }
 }
