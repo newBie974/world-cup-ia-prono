@@ -41,9 +41,9 @@ def font(size):
 
 
 def main():
-    matches, results, _ = load()
-    rows, totals = evaluate(matches, results)
-    graded = next(iter(totals.values()))["graded"] if totals else 0
+    matches, results, bracket, _ = load()
+    group_rows, bracket_rows, totals = evaluate(matches, results, bracket)
+    graded = len(group_rows) + len(bracket_rows)
     ranking = sorted(list(AIS), key=lambda a: totals[a]["pts"], reverse=True)
 
     img = Image.new("RGB", (W, H), PAPER)
@@ -63,8 +63,9 @@ def main():
         d.text((x + cw - 104, y0 + 26), medal, font=font(26), fill=PAPER)
         d.text((x + 24, y0 + 74), LABEL[a].upper(), font=font(40), fill=INK)
         d.text((x + 20, y0 + 130), str(totals[a]["pts"]), font=font(130), fill=INK)
-        g = totals[a]["graded"]
-        pct = round(100 * totals[a]["pts"] / g) if g else 0
+        poss = totals[a]["possible"]
+        # arrondi demi-vers-le-haut, identique à Math.round() du dashboard JS
+        pct = int(100 * totals[a]["pts"] / poss + 0.5) if poss else 0
         d.text((x + 24, y0 + 296), f"{pct}%  -  {totals[a]['pts']} pts", font=font(26), fill=INK)
 
     img.save(OUT, "PNG")

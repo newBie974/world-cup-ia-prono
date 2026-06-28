@@ -5,29 +5,43 @@ description: Met à jour le AI Prono Battle (Mondial 2026). Récupère les vrais
 
 # Prono Recap — AI Prono Battle (Coupe du Monde 2026)
 
-Trois IA (Claude, GPT, Gemini) ont pronostiqué les 72 matchs de poule du Mondial 2026
-(vainqueur ou nul). Ce skill compare leurs pronostics aux vrais résultats et tient un
-classement cumulé. Scoring : **1 pt par résultat juste** (le vainqueur OU le nul prédit
-correspond au résultat réel). Pas de bonus score exact.
+Trois IA (Claude, GPT, Gemini) ont pronostiqué le Mondial 2026. Ce skill compare leurs
+pronostics aux vrais résultats et tient un classement **cumulé sur tout le tournoi** :
+
+- **Phase de poules** (72 matchs, `data/results.json`) : **1 pt par résultat juste**
+  (vainqueur OU nul correctement prédit). Pas de bonus score exact.
+- **Phase finale** (bracket, `data/bracket.json`) : barème enrichi, **3 pts max par match** —
+  **+1** bonne équipe qualifiée, **+1** score exact (temps régl./prolongation),
+  **+1** bonne prédiction TAB (le match va, ou non, aux tirs au but). Pas de nul possible.
+
+La « réussite » affichée = % des points POSSIBLES gagnés (1 en jeu par match de poule,
+3 par match de phase finale).
 
 ## Fichiers
 
-- `data/predictions.json` — référence figée : 72 matchs + le pronostic de chaque IA. **Ne pas modifier.**
-- `data/results.json` — la mémoire : les vrais résultats enregistrés. C'est le SEUL fichier que ce skill écrit côté données.
-- `scripts/score.py` — scoring déterministe (classement + focus du jour + liste des matchs en attente).
+- `data/predictions.json` — référence figée : 72 matchs de poule + le pronostic de chaque IA. **Ne pas modifier.**
+- `data/results.json` — mémoire des résultats de **poule**. Écrit par ce skill.
+- `data/bracket.json` — **phase finale** : affiches, pronos (`pred[ia] = {team, score, tab}`) et
+  résultats (`winner`, `score`, `tab`, `pens`). Écrit par ce skill quand on note un match de bracket.
+- `scripts/score.py` — scoring déterministe (classement cumulé + focus jour `--date` / tour `--round` + `--pending`).
 - `recaps/AAAA-MM-JJ.md` — récap écrit à chaque run.
-- `index.html` — dashboard public (lit les 2 JSON, rien à régénérer ; déployé via GitHub Pages).
-- `scripts/og_card.py` — régénère `og.png` (carte du classement) ; lit predictions+results.
+- `index.html` — dashboard public (lit les 3 JSON, rien à régénérer ; déployé via GitHub Pages).
+- `scripts/og_card.py` — régénère `og.png` (carte du classement) ; lit predictions+results+bracket.
 - `social/AAAA-MM-JJ.md` — texte de post prêt à publier (écrit à chaque run avec du nouveau).
 
 ## Procédure
 
 1. **Date du jour.** Utilise la date courante (contexte `currentDate`), format `AAAA-MM-JJ`.
 
-2. **Lister les matchs à noter** (joués, date ≤ aujourd'hui, pas encore dans results.json) :
+2. **Lister les matchs à noter** :
    ```
    python3 scripts/score.py --pending <AAAA-MM-JJ>
    ```
+   Le JSON renvoie deux types d'entrées (champ `phase`) :
+   - `"poules"` : matchs de poule joués (date ≤ valeur) pas encore dans `results.json`.
+   - `"finale"` : matchs de phase finale dont l'**affiche est connue** et le résultat manquant
+     (champ `round` = `r32`/`r16`/`qf`/`sf`/`third`/`final`).
+
    Si la liste est vide → rien à faire, dis-le et arrête-toi (sauf si l'utilisateur demande juste le classement actuel, voir étape 6).
 
 3. **Récupérer les vrais résultats** des matchs listés via WebSearch (sources : score final officiel,
@@ -37,12 +51,19 @@ correspond au résultat réel). Pas de bonus score exact.
    - le `score` final (ex. `"2-1"`).
    - ⚠️ N'enregistre QUE des matchs réellement terminés. Un match non joué / en cours → ne pas l'ajouter.
 
-4. **Écrire dans `data/results.json`** : ajouter chaque résultat sous `results` (clé = id du match en string),
-   et mettre `last_updated` à la date du jour. Conserver les résultats déjà présents.
+4. **Écrire les résultats** (conserver l'existant, mettre `last_updated` à la date du jour) :
+   - **Poules** → dans `data/results.json`, sous `results` (clé = id du match en string) :
+     `{ "winner": "<équipe ou Nul>", "score": "2-1" }`.
+   - **Phase finale** → dans `data/bracket.json`, sur le match correspondant (clé `id`, ex `R32-1`) :
+     renseigner `winner` (équipe qualifiée, jamais "Nul"), `score` (temps régl./prolongation, ex `"1-1"`),
+     `tab` (`true`/`false` selon tirs au but) et `pens` (score des TAB pour l'affichage, ex `"4-2"`, sinon `null`).
+     ⚠️ Quand un tour se termine, **remplir aussi les affiches du tour suivant** (`home`/`away` des matchs
+     `r16`/`qf`/… à partir des vainqueurs) puis re-demander aux 3 IA leurs pronos (`pred[ia] = {team, score, tab}`).
 
-5. **Recalculer + récap.** Lancer :
+5. **Recalculer + récap.** Lancer (selon ce qui a été noté) :
    ```
-   python3 scripts/score.py --date <AAAA-MM-JJ>
+   python3 scripts/score.py --date <AAAA-MM-JJ>   # focus poules du jour
+   python3 scripts/score.py --round <r32|r16|qf|sf|third|final>   # focus d'un tour de phase finale
    ```
    Coller la sortie Markdown dans `recaps/<AAAA-MM-JJ>.md` + 2-3 phrases d'analyse (sous un titre
    `## Analyse`, en bullets — c'est cette section qui s'affiche sur le dashboard).
@@ -62,7 +83,7 @@ correspond au résultat réel). Pas de bonus score exact.
 
 8. **Publier** : committer et pousser tous les changements :
    ```
-   git add data/results.json recaps/ og.png social/
+   git add data/results.json data/bracket.json recaps/ og.png social/
    git commit -m "data: maj résultats <date> + recap + assets sociaux"
    git push
    ```
@@ -75,7 +96,11 @@ correspond au résultat réel). Pas de bonus score exact.
 
 ## Notes
 
-- Le scoring compare des chaînes : le `winner` doit matcher exactement le nom dans `predictions.json`.
-  En cas de doute sur l'orthographe, ouvre `predictions.json` pour copier le nom exact.
-- Les matchs sont identifiés par leur `id` (1-72), pas par la date — plusieurs matchs partagent une date.
-- Si un résultat a été mal saisi, corrige l'entrée dans `results.json` et relance `score.py`.
+- Le scoring compare des chaînes : le `winner` doit matcher exactement le nom dans `predictions.json`
+  (poules) ou `bracket.json` (`home`/`away` d'un match de finale). En cas de doute, copie le nom exact.
+- Matchs de poule identifiés par `id` (1-72) ; matchs de phase finale par `id` texte (`R32-1`, `QF-3`, `FINAL`…).
+- Phase finale : **pas de "Nul"** (prolongation/TAB donnent toujours un vainqueur). Si TAB, `score` est
+  l'égalité de fin de prolongation (ex `"1-1"`) et `tab` vaut `true`.
+- Si un résultat a été mal saisi, corrige l'entrée (`results.json` ou `bracket.json`) et relance `score.py`.
+- Toute évolution du barème doit être répercutée dans les **deux** moteurs : `scripts/score.py`
+  (Python) et `flue/lib/scoring.ts` (TS).
