@@ -222,14 +222,20 @@
   .bteam.placeholder { opacity: .42; font-style: italic; font-weight: 700; }
   .bteam .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .bsep { height: 2px; background: var(--dim); margin: 2px 0; }
-  .bscore { font-family: "Montserrat"; font-weight: 900; font-size: 13px; text-align: center; margin-top: 8px; opacity: .7; }
-  .bpreds { display: flex; gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 2px solid var(--dim); }
-  .bpred { flex: 1; min-width: 0; font-family: "Montserrat"; font-weight: 900; font-size: 9px; text-transform: uppercase;
-    padding: 3px 4px; border: 2px solid var(--ink); text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bscore { font-family: "Montserrat"; font-weight: 900; font-size: 13px; text-align: center; margin-top: 8px; opacity: .75; }
+  .bscore .tab { background: var(--ink); color: var(--paper); padding: 1px 5px; font-size: 10px; margin-left: 4px; }
+  .bpreds { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 2px solid var(--dim); }
+  .bpred { display: flex; align-items: center; gap: 5px; min-width: 0; font-family: "Montserrat"; font-weight: 900;
+    font-size: 10px; text-transform: uppercase; padding: 3px 6px; border: 2px solid var(--ink); }
   .bpred.claude { background: var(--cyan); }
   .bpred.gpt { background: var(--lime); }
   .bpred.gemini { background: var(--pink); }
-  .bpred.miss { background: var(--paper); opacity: .5; text-decoration: line-through; }
+  .bpred .pteam { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bpred .psc { margin-left: auto; font-weight: 900; }
+  .bpred .btab { background: var(--ink); color: var(--paper); padding: 0 3px; font-size: 8px; }
+  .bpred .bpts { background: var(--paper); border: 1px solid var(--ink); padding: 0 4px; font-size: 9px; }
+  .bpred.miss { opacity: .5; }
+  .bpred.miss .pteam { text-decoration: line-through; }
   @media (max-width: 767px) {
     .bracket { display: block; }
     .bround { width: 100%; }
@@ -411,25 +417,43 @@ async function load() {
   };
 }
 
-// Ajoute les pronos de phase finale au cumul du podium (1 pt par prono juste, pas de nul).
-// Renvoie les matchs enrichis de leurs hits pour le rendu du bracket.
+// Normalise un prono bracket en {team, score, tab} (tolère l'ancien format string).
+function predOf(m, key) {
+  const p = m.pred ? m.pred[key] : undefined;
+  if (p == null) return null;
+  if (typeof p === "string") return { team: p, score: null, tab: null };
+  return { team: p.team ?? null, score: p.score ?? null, tab: p.tab ?? null };
+}
+
+// Barème phase finale : +1 bon qualifié, +1 score exact (temps régl./prolong.),
+// +1 bonne prédiction TAB (le match va, ou non, aux tirs au but). Max 3 pts/match.
+function bracketPoints(pred, m) {
+  let pts = 0;
+  if (pred.team && pred.team === m.winner) pts += 1;
+  if (pred.score && m.score && pred.score === m.score) pts += 1;
+  if (pred.tab != null && m.tab != null && !!pred.tab === !!m.tab) pts += 1;
+  return pts;
+}
+
+// Cumule la phase finale au podium et renvoie les matchs enrichis pour le rendu.
 function applyBracket(bracket, totals) {
   return bracket.map(m => {
-    const hits = {};
+    const scored = {};
     if (m.winner) for (const a of AIS) {
-      const pick = m.pred ? m.pred[a.key] : undefined;
-      if (pick == null) { hits[a.key] = null; continue; }
-      const hit = pick === m.winner;
-      hits[a.key] = hit;
-      totals[a.key].pts += hit ? 1 : 0;
+      const pred = predOf(m, a.key);
+      if (!pred) { scored[a.key] = null; continue; }
+      const pts = bracketPoints(pred, m);
+      scored[a.key] = pts;
+      totals[a.key].pts += pts;
       totals[a.key].graded += 1;
+      totals[a.key].possible += 3;          // 3 points en jeu par match de phase finale
     }
-    return { ...m, hits };
+    return { ...m, scored };
   });
 }
 
 function compute(matches, results) {
-  const totals = Object.fromEntries(AIS.map(a => [a.key, { pts: 0, graded: 0 }]));
+  const totals = Object.fromEntries(AIS.map(a => [a.key, { pts: 0, graded: 0, possible: 0 }]));
   const rows = matches.map(m => {
     const actual = results[String(m.id)];
     const hits = {};
@@ -438,6 +462,7 @@ function compute(matches, results) {
       hits[a.key] = hit;
       totals[a.key].pts += hit ? 1 : 0;
       totals[a.key].graded += 1;
+      totals[a.key].possible += 1;          // 1 point en jeu par match de poule
     }
     return { ...m, actual, hits };
   });
@@ -452,7 +477,7 @@ function renderPodium(totals) {
   const rankOf = a => ranked.indexOf(a);
   document.getElementById("podium").innerHTML = order.map((a, col) => {
     const r = rankOf(a), t = totals[a.key];
-    const pct = t.graded ? Math.round(100 * t.pts / t.graded) : 0;
+    const pct = t.possible ? Math.round(100 * t.pts / t.possible) : 0;
     const meta = t.graded ? `${MEDAL[r]} ${pct}% · ${t.graded} matchs` : "en attente du coup d'envoi";
     return `<div class="ai-card neo ${r === 0 ? "leader" : ""}" style="--accent:${a.accent};animation-delay:${col * 0.1}s">
       <span class="place">${PLACE[r]}</span>
@@ -496,17 +521,26 @@ function bTeamRow(team, win, roundKey) {
 function bMatchHtml(m) {
   const w = m.winner;
   const preds = AIS.map(a => {
-    const pick = m.pred ? m.pred[a.key] : undefined;
-    if (pick == null) return "";
-    const miss = w && pick !== w;
-    return `<span class="bpred ${a.key} ${miss ? "miss" : ""}" title="${a.label} : ${pick}">${pick}</span>`;
+    const pred = predOf(m, a.key);
+    if (!pred) return "";
+    const miss = w && pred.team !== w;
+    const pts = w ? bracketPoints(pred, m) : null;
+    return `<span class="bpred ${a.key} ${miss ? "miss" : ""}" title="${a.label}">
+      <span class="pteam">${pred.team || "?"}</span>
+      ${pred.score ? `<span class="psc">${pred.score}</span>` : ""}
+      ${pred.tab ? `<span class="btab">tab</span>` : ""}
+      ${pts != null ? `<span class="bpts">+${pts}</span>` : ""}
+    </span>`;
   }).join("");
   const predRow = preds.replace(/\s/g, "") ? `<div class="bpreds">${preds}</div>` : "";
+  const res = m.score
+    ? `<div class="bscore">${m.score}${m.tab ? `<span class="tab">TAB${m.pens ? " " + m.pens : ""}</span>` : ""}</div>`
+    : "";
   return `<div class="bmatch">
     ${bTeamRow(m.home, w && m.home === w, m.round)}
     <div class="bsep"></div>
     ${bTeamRow(m.away, w && m.away === w, m.round)}
-    ${m.score ? `<div class="bscore">${m.score}</div>` : ""}
+    ${res}
     ${predRow}
   </div>`;
 }

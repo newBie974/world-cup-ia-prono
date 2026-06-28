@@ -1,5 +1,5 @@
 {
-  "_comment": "Phase finale (elimination directe) du Mondial 2026. Rempli par tour : affiches (home/away) connues a la fin du tour precedent, puis pred des 3 IA (nom d'equipe qualifiee, jamais 'Nul'), puis winner/score. 1 pt par prono juste.",
+  "_comment": "Phase finale Mondial 2026. pred[ia] = {team, score, tab}. winner = equipe qualifiee ; score = score temps reglementaire/prolongation (ex '1-1') ; tab = True si tirs au but ; pens = score des tab (affichage). Bareme : +1 bon qualifie, +1 score exact, +1 bonne prediction TAB.",
   "rounds": [
     {
       "key": "r32",
@@ -40,13 +40,11 @@
       "slot": "2A vs 2B",
       "home": "Afrique du Sud",
       "away": "Canada",
-      "pred": {
-        "claude": "Canada",
-        "gpt": "Canada",
-        "gemini": "Canada"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-2",
@@ -54,13 +52,11 @@
       "slot": "1E vs 3B",
       "home": "Allemagne",
       "away": "Bosnie",
-      "pred": {
-        "claude": "Allemagne",
-        "gpt": "Allemagne",
-        "gemini": "Allemagne"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-3",
@@ -68,13 +64,11 @@
       "slot": "1F vs 2C",
       "home": "Pays-Bas",
       "away": "Maroc",
-      "pred": {
-        "claude": "Pays-Bas",
-        "gpt": "Pays-Bas",
-        "gemini": "Pays-Bas"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-4",
@@ -82,13 +76,11 @@
       "slot": "1C vs 2F",
       "home": "Brésil",
       "away": "Japon",
-      "pred": {
-        "claude": "Brésil",
-        "gpt": "Brésil",
-        "gemini": "Brésil"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-5",
@@ -96,13 +88,11 @@
       "slot": "1I vs 3D",
       "home": "France",
       "away": "Paraguay",
-      "pred": {
-        "claude": "France",
-        "gpt": "France",
-        "gemini": "France"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-6",
@@ -110,13 +100,11 @@
       "slot": "2E vs 2I",
       "home": "Côte d'Ivoire",
       "away": "Sénégal",
-      "pred": {
-        "claude": "Sénégal",
-        "gpt": "Sénégal",
-        "gemini": "Sénégal"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-7",
@@ -124,13 +112,11 @@
       "slot": "1A vs 3F",
       "home": "Mexique",
       "away": "Suède",
-      "pred": {
-        "claude": "Mexique",
-        "gpt": "Mexique",
-        "gemini": "Mexique"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-8",
@@ -138,13 +124,11 @@
       "slot": "1L vs 3K",
       "home": "Angleterre",
       "away": "Colombie",
-      "pred": {
-        "claude": "Angleterre",
-        "gpt": "Angleterre",
-        "gemini": "Angleterre"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-9",
@@ -152,13 +136,11 @@
       "slot": "1D vs 3E",
       "home": "États-Unis",
       "away": "Équateur",
-      "pred": {
-        "claude": "États-Unis",
-        "gpt": "États-Unis",
-        "gemini": "États-Unis"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-10",
@@ -166,13 +148,11 @@
       "slot": "1G vs 3A",
       "home": "Belgique",
       "away": "Corée du Sud",
-      "pred": {
-        "claude": "Belgique",
-        "gpt": "Belgique",
-        "gemini": "Belgique"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-11",
@@ -180,13 +160,11 @@
       "slot": "2K vs 2L",
       "home": "RD Congo",
       "away": "Ghana",
-      "pred": {
-        "claude": "Ghana",
-        "gpt": "Ghana",
-        "gemini": "Ghana"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-12",
@@ -194,13 +172,11 @@
       "slot": "1H vs 2J",
       "home": "Espagne",
       "away": "Algérie",
-      "pred": {
-        "claude": "Espagne",
-        "gpt": "Espagne",
-        "gemini": "Espagne"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-13",
@@ -208,13 +184,11 @@
       "slot": "1B vs 3G",
       "home": "Suisse",
       "away": "Iran",
-      "pred": {
-        "claude": "Suisse",
-        "gpt": "Suisse",
-        "gemini": "Suisse"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-14",
@@ -222,13 +196,11 @@
       "slot": "1J vs 2H",
       "home": "Argentine",
       "away": "Cap-Vert",
-      "pred": {
-        "claude": "Argentine",
-        "gpt": "Argentine",
-        "gemini": "Argentine"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-15",
@@ -236,13 +208,11 @@
       "slot": "1K vs 3L",
       "home": "Portugal",
       "away": "Croatie",
-      "pred": {
-        "claude": "Portugal",
-        "gpt": "Portugal",
-        "gemini": "Portugal"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R32-16",
@@ -250,13 +220,11 @@
       "slot": "2D vs 2G",
       "home": "Australie",
       "away": "Égypte",
-      "pred": {
-        "claude": "Égypte",
-        "gpt": "Égypte",
-        "gemini": "Égypte"
-      },
+      "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R16-1",
@@ -266,7 +234,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R16-2",
@@ -276,7 +246,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R16-3",
@@ -286,7 +258,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R16-4",
@@ -296,7 +270,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R16-5",
@@ -306,7 +282,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R16-6",
@@ -316,7 +294,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R16-7",
@@ -326,7 +306,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "R16-8",
@@ -336,7 +318,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "QF-1",
@@ -346,7 +330,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "QF-2",
@@ -356,7 +342,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "QF-3",
@@ -366,7 +354,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "QF-4",
@@ -376,7 +366,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "SF-1",
@@ -386,7 +378,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "SF-2",
@@ -396,7 +390,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "THIRD",
@@ -406,7 +402,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     },
     {
       "id": "FINAL",
@@ -416,7 +414,9 @@
       "away": null,
       "pred": {},
       "winner": null,
-      "score": null
+      "score": null,
+      "tab": null,
+      "pens": null
     }
   ]
 }
