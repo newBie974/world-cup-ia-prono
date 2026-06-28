@@ -1,0 +1,358 @@
+{
+  "_comment": "Phase finale (elimination directe) du Mondial 2026. Rempli par tour : affiches (home/away) connues a la fin du tour precedent, puis pred des 3 IA (nom d'equipe qualifiee, jamais 'Nul'), puis winner/score. 1 pt par prono juste.",
+  "rounds": [
+    {
+      "key": "r32",
+      "label": "32es de finale",
+      "count": 16
+    },
+    {
+      "key": "r16",
+      "label": "16es de finale",
+      "count": 8
+    },
+    {
+      "key": "qf",
+      "label": "Quarts de finale",
+      "count": 4
+    },
+    {
+      "key": "sf",
+      "label": "Demi-finales",
+      "count": 2
+    },
+    {
+      "key": "third",
+      "label": "Match pour la 3e place",
+      "count": 1
+    },
+    {
+      "key": "final",
+      "label": "Finale",
+      "count": 1
+    }
+  ],
+  "last_updated": null,
+  "matches": [
+    {
+      "id": "R32-1",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-2",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-3",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-4",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-5",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-6",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-7",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-8",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-9",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-10",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-11",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-12",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-13",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-14",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-15",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R32-16",
+      "round": "r32",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R16-1",
+      "round": "r16",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R16-2",
+      "round": "r16",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R16-3",
+      "round": "r16",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R16-4",
+      "round": "r16",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R16-5",
+      "round": "r16",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R16-6",
+      "round": "r16",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R16-7",
+      "round": "r16",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "R16-8",
+      "round": "r16",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "QF-1",
+      "round": "qf",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "QF-2",
+      "round": "qf",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "QF-3",
+      "round": "qf",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "QF-4",
+      "round": "qf",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "SF-1",
+      "round": "sf",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "SF-2",
+      "round": "sf",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "THIRD",
+      "round": "third",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    },
+    {
+      "id": "FINAL",
+      "round": "final",
+      "slot": "",
+      "home": null,
+      "away": null,
+      "pred": {},
+      "winner": null,
+      "score": null
+    }
+  ]
+}

@@ -183,6 +183,59 @@
   .empty .big { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 26px; }
   .empty .pill { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 15px; background: var(--yellow); border: 2px solid var(--ink); padding: 4px 12px; }
 
+  /* ---------- View tabs (Poules / Tableau) ---------- */
+  .viewtabs { display: flex; margin: 8px 0 32px; }
+  .viewtabs button {
+    flex: 1; font-family: "Montserrat"; font-weight: 900; text-transform: uppercase;
+    font-size: clamp(12px, 2.6vw, 16px); letter-spacing: -.02em; padding: 16px 12px; cursor: pointer;
+    background: var(--paper); border: var(--border); box-shadow: var(--shadow-sm);
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    transition: background .1s ease;
+  }
+  .viewtabs button + button { border-left: none; }
+  .viewtabs button .material-symbols-outlined { font-size: 20px; }
+  .viewtabs button.active { background: var(--ink); color: var(--paper); }
+  .viewtabs button:not(.active):hover { background: var(--yellow); }
+
+  /* ---------- Bracket (phase finale) ---------- */
+  .bnote { font-family: "Montserrat"; font-weight: 800; text-transform: uppercase; font-size: 12px;
+    background: var(--yellow); border: 2px solid var(--ink); padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+  .bnote .material-symbols-outlined { font-size: 16px; }
+
+  .broundstrip { display: flex; gap: 10px; overflow-x: auto; padding: 4px; margin-bottom: 22px; scrollbar-width: thin; }
+  .broundchip { flex: 0 0 auto; font-family: "Montserrat"; font-weight: 900; text-transform: uppercase;
+    font-size: 12px; padding: 10px 14px; background: var(--paper); border: var(--border); box-shadow: var(--shadow-sm);
+    cursor: pointer; white-space: nowrap; }
+  .broundchip:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 0 var(--ink); }
+  .broundchip.active { background: var(--ink); color: var(--paper); }
+  @media (min-width: 768px) { .broundstrip { display: none; } }   /* desktop = colonnes */
+
+  .bracket { display: flex; gap: 22px; overflow-x: auto; padding-bottom: 16px; align-items: stretch; }
+  .bround { flex: 0 0 auto; width: 228px; display: flex; flex-direction: column; }
+  .bround-h { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 13px;
+    background: var(--ink); color: var(--paper); padding: 9px 10px; margin-bottom: 14px; text-align: center; }
+  .bround-body { flex: 1; display: flex; flex-direction: column; justify-content: space-around; gap: 14px; }
+  .bmatch { background: var(--paper); border: var(--border); box-shadow: var(--shadow-sm); padding: 10px; }
+  .bteam { display: flex; align-items: center; gap: 8px; font-family: "Montserrat"; font-weight: 800;
+    text-transform: uppercase; font-size: 12px; padding: 4px 2px; }
+  .bteam.win { background: var(--yellow); margin: 0 -4px; padding: 4px 6px; }
+  .bteam.placeholder { opacity: .42; font-style: italic; font-weight: 700; }
+  .bteam .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bsep { height: 2px; background: var(--dim); margin: 2px 0; }
+  .bscore { font-family: "Montserrat"; font-weight: 900; font-size: 13px; text-align: center; margin-top: 8px; opacity: .7; }
+  .bpreds { display: flex; gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 2px solid var(--dim); }
+  .bpred { flex: 1; min-width: 0; font-family: "Montserrat"; font-weight: 900; font-size: 9px; text-transform: uppercase;
+    padding: 3px 4px; border: 2px solid var(--ink); text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bpred.claude { background: var(--cyan); }
+  .bpred.gpt { background: var(--lime); }
+  .bpred.gemini { background: var(--pink); }
+  .bpred.miss { background: var(--paper); opacity: .5; text-decoration: line-through; }
+  @media (max-width: 767px) {
+    .bracket { display: block; }
+    .bround { width: 100%; }
+    .bround:not(.active) { display: none; }
+  }
+
   /* ---------- Récap du jour ---------- */
   .recap { background: var(--paper); padding: 32px; margin-bottom: 24px; }
   .recap h3 { font-family: "Montserrat"; font-weight: 900; text-transform: uppercase; font-size: 24px; display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
@@ -245,6 +298,13 @@
 
   <section class="podium" id="podium"></section>
 
+  <div class="viewtabs">
+    <button data-view="poules" class="active"><span class="material-symbols-outlined">grid_view</span>Phase de poules</button>
+    <button data-view="bracket"><span class="material-symbols-outlined">account_tree</span>Phase finale</button>
+  </div>
+
+  <div id="view-poules">
+
   <section class="controls neo" style="padding:14px">
     <div class="daystrip" id="daystrip"></div>
   </section>
@@ -279,6 +339,14 @@
     <h3><span class="ico material-symbols-outlined">article</span> Récap du jour</h3>
     <div class="recap-body" id="recapBody"></div>
   </section>
+
+  </div><!-- /view-poules -->
+
+  <div id="view-bracket" hidden>
+    <div class="bnote"><span class="material-symbols-outlined">schedule</span> Phase finale — à partir du 28 juin · 32 qualifiés (2 par groupe + 8 meilleurs 3es)</div>
+    <div class="broundstrip" id="broundstrip"></div>
+    <div class="bracket" id="bracket"></div>
+  </div>
 
   <section class="method neo" id="method">
     <h3><span class="ico material-symbols-outlined">analytics</span> Méthodologie du Battle</h3>
@@ -332,11 +400,32 @@ async function load() {
   // (le cache navigateur + CDN GitHub Pages servent sinon une vieille copie).
   const bust = `?t=${Date.now()}`;
   const opts = { cache: "no-store" };
-  const [pred, res] = await Promise.all([
+  const [pred, res, brk] = await Promise.all([
     fetch("data/predictions.json", opts).then(r => r.json()),
     fetch("data/results.json" + bust, opts).then(r => r.json()),
+    fetch("data/bracket.json" + bust, opts).then(r => r.json()).catch(() => ({ matches: [] })),
   ]);
-  return { matches: pred.matches, results: res.results || {}, updated: res.last_updated };
+  return {
+    matches: pred.matches, results: res.results || {}, updated: res.last_updated,
+    bracket: brk.matches || [],
+  };
+}
+
+// Ajoute les pronos de phase finale au cumul du podium (1 pt par prono juste, pas de nul).
+// Renvoie les matchs enrichis de leurs hits pour le rendu du bracket.
+function applyBracket(bracket, totals) {
+  return bracket.map(m => {
+    const hits = {};
+    if (m.winner) for (const a of AIS) {
+      const pick = m.pred ? m.pred[a.key] : undefined;
+      if (pick == null) { hits[a.key] = null; continue; }
+      const hit = pick === m.winner;
+      hits[a.key] = hit;
+      totals[a.key].pts += hit ? 1 : 0;
+      totals[a.key].graded += 1;
+    }
+    return { ...m, hits };
+  });
 }
 
 function compute(matches, results) {
@@ -385,6 +474,62 @@ function predCell(ai, pick, hit) {
   if (hit === true) { cls += " hit"; mk = `<span class="mk">✓</span>`; }
   else if (hit === false) { cls += " miss"; mk = `<span class="mk">✗</span>`; }
   return `<td class="c ${ai}"><span class="${cls}">${mk}<span class="lbl">${lbl}</span></span></td>`;
+}
+
+// ---------- Vue tableau (bracket) ----------
+const BROUNDS = [
+  { key: "r32",   label: "32es",     full: "32es de finale" },
+  { key: "r16",   label: "16es",     full: "16es de finale" },
+  { key: "qf",    label: "Quarts",   full: "Quarts de finale" },
+  { key: "sf",    label: "Demis",    full: "Demi-finales" },
+  { key: "final", label: "Finale",   full: "Finale" },
+  { key: "third", label: "3e place", full: "Match 3e place" },
+];
+
+function bTeamRow(team, win, roundKey) {
+  const ph = team == null || team === "";
+  const label = ph ? (roundKey === "r32" ? "Qualifié" : "Vainqueur") : team;
+  const cls = ["bteam", win ? "win" : "", ph ? "placeholder" : ""].filter(Boolean).join(" ");
+  return `<div class="${cls}">${ph ? "" : flagImg(team)}<span class="nm">${label}</span></div>`;
+}
+
+function bMatchHtml(m) {
+  const w = m.winner;
+  const preds = AIS.map(a => {
+    const pick = m.pred ? m.pred[a.key] : undefined;
+    if (pick == null) return "";
+    const miss = w && pick !== w;
+    return `<span class="bpred ${a.key} ${miss ? "miss" : ""}" title="${a.label} : ${pick}">${pick}</span>`;
+  }).join("");
+  const predRow = preds.replace(/\s/g, "") ? `<div class="bpreds">${preds}</div>` : "";
+  return `<div class="bmatch">
+    ${bTeamRow(m.home, w && m.home === w, m.round)}
+    <div class="bsep"></div>
+    ${bTeamRow(m.away, w && m.away === w, m.round)}
+    ${m.score ? `<div class="bscore">${m.score}</div>` : ""}
+    ${predRow}
+  </div>`;
+}
+
+function renderBracket(brows) {
+  const strip = document.getElementById("broundstrip");
+  strip.innerHTML = BROUNDS.map((r, i) =>
+    `<button class="broundchip ${i === 0 ? "active" : ""}" data-round="${r.key}">${r.label}</button>`).join("");
+  document.getElementById("bracket").innerHTML = BROUNDS.map((r, i) =>
+    `<div class="bround ${i === 0 ? "active" : ""}" data-round="${r.key}">
+      <div class="bround-h">${r.full}</div>
+      <div class="bround-body">${brows.filter(m => m.round === r.key).map(bMatchHtml).join("")}</div>
+    </div>`).join("");
+  strip.querySelectorAll(".broundchip").forEach(btn => btn.addEventListener("click", () => {
+    strip.querySelectorAll(".broundchip").forEach(b => b.classList.toggle("active", b === btn));
+    document.querySelectorAll(".bround").forEach(c => c.classList.toggle("active", c.dataset.round === btn.dataset.round));
+  }));
+}
+
+function setView(v) {
+  document.getElementById("view-poules").hidden = v !== "poules";
+  document.getElementById("view-bracket").hidden = v !== "bracket";
+  document.querySelectorAll(".viewtabs button").forEach(b => b.classList.toggle("active", b.dataset.view === v));
 }
 
 // ---------- Vue calendrier / daily ----------
@@ -552,10 +697,11 @@ function pickDefaultDate() {
 }
 
 (async function init() {
-  let state;
+  let state, brows = [];
   try {
-    const { matches, results } = await load();
+    const { matches, results, bracket } = await load();
     state = compute(matches, results);
+    brows = applyBracket(bracket, state.totals);   // cumule la phase finale au podium
     DATES = [...new Set(matches.map(m => m.date))].sort();
     selectedDate = pickDefaultDate();
     const groups = [...new Set(matches.map(m => m.group))].sort();
@@ -569,7 +715,10 @@ function pickDefaultDate() {
   renderPodium(state.totals);
   buildDaystrip(state.rows);
   renderDay(state.rows);
+  renderBracket(brows);
   loadRecap();
+  document.querySelectorAll(".viewtabs button").forEach(b =>
+    b.addEventListener("click", () => setView(b.dataset.view)));
   document.getElementById("group").addEventListener("change", () => renderDay(state.rows));
   document.getElementById("jumpToday").addEventListener("click", (e) => {
     e.preventDefault();
