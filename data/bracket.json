@@ -40,7 +40,11 @@
       "slot": "2A vs 2B",
       "home": "Afrique du Sud",
       "away": "Canada",
-      "pred": {},
+      "pred": {
+        "claude": "Canada",
+        "gpt": "Canada",
+        "gemini": "Canada"
+      },
       "winner": null,
       "score": null
     },
@@ -50,7 +54,11 @@
       "slot": "1E vs 3B",
       "home": "Allemagne",
       "away": "Bosnie",
-      "pred": {},
+      "pred": {
+        "claude": "Allemagne",
+        "gpt": "Allemagne",
+        "gemini": "Allemagne"
+      },
       "winner": null,
       "score": null
     },
@@ -60,7 +68,11 @@
       "slot": "1F vs 2C",
       "home": "Pays-Bas",
       "away": "Maroc",
-      "pred": {},
+      "pred": {
+        "claude": "Pays-Bas",
+        "gpt": "Pays-Bas",
+        "gemini": "Pays-Bas"
+      },
       "winner": null,
       "score": null
     },
@@ -70,7 +82,11 @@
       "slot": "1C vs 2F",
       "home": "Brésil",
       "away": "Japon",
-      "pred": {},
+      "pred": {
+        "claude": "Brésil",
+        "gpt": "Brésil",
+        "gemini": "Brésil"
+      },
       "winner": null,
       "score": null
     },
@@ -80,7 +96,11 @@
       "slot": "1I vs 3D",
       "home": "France",
       "away": "Paraguay",
-      "pred": {},
+      "pred": {
+        "claude": "France",
+        "gpt": "France",
+        "gemini": "France"
+      },
       "winner": null,
       "score": null
     },
@@ -90,7 +110,11 @@
       "slot": "2E vs 2I",
       "home": "Côte d'Ivoire",
       "away": "Sénégal",
-      "pred": {},
+      "pred": {
+        "claude": "Sénégal",
+        "gpt": "Sénégal",
+        "gemini": "Sénégal"
+      },
       "winner": null,
       "score": null
     },
@@ -100,7 +124,11 @@
       "slot": "1A vs 3F",
       "home": "Mexique",
       "away": "Suède",
-      "pred": {},
+      "pred": {
+        "claude": "Mexique",
+        "gpt": "Mexique",
+        "gemini": "Mexique"
+      },
       "winner": null,
       "score": null
     },
@@ -110,7 +138,11 @@
       "slot": "1L vs 3K",
       "home": "Angleterre",
       "away": "Colombie",
-      "pred": {},
+      "pred": {
+        "claude": "Angleterre",
+        "gpt": "Angleterre",
+        "gemini": "Angleterre"
+      },
       "winner": null,
       "score": null
     },
@@ -120,7 +152,11 @@
       "slot": "1D vs 3E",
       "home": "États-Unis",
       "away": "Équateur",
-      "pred": {},
+      "pred": {
+        "claude": "États-Unis",
+        "gpt": "États-Unis",
+        "gemini": "États-Unis"
+      },
       "winner": null,
       "score": null
     },
@@ -130,7 +166,11 @@
       "slot": "1G vs 3A",
       "home": "Belgique",
       "away": "Corée du Sud",
-      "pred": {},
+      "pred": {
+        "claude": "Belgique",
+        "gpt": "Belgique",
+        "gemini": "Belgique"
+      },
       "winner": null,
       "score": null
     },
@@ -140,7 +180,11 @@
       "slot": "2K vs 2L",
       "home": "RD Congo",
       "away": "Ghana",
-      "pred": {},
+      "pred": {
+        "claude": "Ghana",
+        "gpt": "Ghana",
+        "gemini": "Ghana"
+      },
       "winner": null,
       "score": null
     },
@@ -150,7 +194,11 @@
       "slot": "1H vs 2J",
       "home": "Espagne",
       "away": "Algérie",
-      "pred": {},
+      "pred": {
+        "claude": "Espagne",
+        "gpt": "Espagne",
+        "gemini": "Espagne"
+      },
       "winner": null,
       "score": null
     },
@@ -160,7 +208,11 @@
       "slot": "1B vs 3G",
       "home": "Suisse",
       "away": "Iran",
-      "pred": {},
+      "pred": {
+        "claude": "Suisse",
+        "gpt": "Suisse",
+        "gemini": "Suisse"
+      },
       "winner": null,
       "score": null
     },
@@ -170,7 +222,11 @@
       "slot": "1J vs 2H",
       "home": "Argentine",
       "away": "Cap-Vert",
-      "pred": {},
+      "pred": {
+        "claude": "Argentine",
+        "gpt": "Argentine",
+        "gemini": "Argentine"
+      },
       "winner": null,
       "score": null
     },
@@ -180,7 +236,11 @@
       "slot": "1K vs 3L",
       "home": "Portugal",
       "away": "Croatie",
-      "pred": {},
+      "pred": {
+        "claude": "Portugal",
+        "gpt": "Portugal",
+        "gemini": "Portugal"
+      },
       "winner": null,
       "score": null
     },
@@ -190,7 +250,11 @@
       "slot": "2D vs 2G",
       "home": "Australie",
       "away": "Égypte",
-      "pred": {},
+      "pred": {
+        "claude": "Égypte",
+        "gpt": "Égypte",
+        "gemini": "Égypte"
+      },
       "winner": null,
       "score": null
     },
