@@ -40,7 +40,23 @@
       "slot": "2A vs 2B",
       "home": "Afrique du Sud",
       "away": "Canada",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Canada",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Canada",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Canada",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -52,7 +68,23 @@
       "slot": "1E vs 3B",
       "home": "Allemagne",
       "away": "Bosnie",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Allemagne",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Allemagne",
+          "score": "3-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Allemagne",
+          "score": "3-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -64,7 +96,23 @@
       "slot": "1F vs 2C",
       "home": "Pays-Bas",
       "away": "Maroc",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Pays-Bas",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Pays-Bas",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Pays-Bas",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -76,7 +124,23 @@
       "slot": "1C vs 2F",
       "home": "Brésil",
       "away": "Japon",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Brésil",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Brésil",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Brésil",
+          "score": "2-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -88,7 +152,23 @@
       "slot": "1I vs 3D",
       "home": "France",
       "away": "Paraguay",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "France",
+          "score": "2-0",
+          "tab": false
+        },
+        "gpt": {
+          "team": "France",
+          "score": "3-0",
+          "tab": false
+        },
+        "gemini": {
+          "team": "France",
+          "score": "3-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -100,7 +180,23 @@
       "slot": "2E vs 2I",
       "home": "Côte d'Ivoire",
       "away": "Sénégal",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Côte d'Ivoire",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Côte d'Ivoire",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Côte d'Ivoire",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -112,7 +208,23 @@
       "slot": "1A vs 3F",
       "home": "Mexique",
       "away": "Suède",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Mexique",
+          "score": "2-0",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Mexique",
+          "score": "2-0",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Mexique",
+          "score": "2-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -124,7 +236,23 @@
       "slot": "1L vs 3K",
       "home": "Angleterre",
       "away": "Colombie",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Angleterre",
+          "score": "2-0",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Angleterre",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Angleterre",
+          "score": "1-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -136,7 +264,23 @@
       "slot": "1D vs 3E",
       "home": "États-Unis",
       "away": "Équateur",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "États-Unis",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "États-Unis",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "États-Unis",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -148,7 +292,23 @@
       "slot": "1G vs 3A",
       "home": "Belgique",
       "away": "Corée du Sud",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Belgique",
+          "score": "2-0",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Belgique",
+          "score": "2-0",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Belgique",
+          "score": "1-1",
+          "tab": true
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -160,7 +320,23 @@
       "slot": "2K vs 2L",
       "home": "RD Congo",
       "away": "Ghana",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "RD Congo",
+          "score": "1-1",
+          "tab": true
+        },
+        "gpt": {
+          "team": "Ghana",
+          "score": "1-1",
+          "tab": true
+        },
+        "gemini": {
+          "team": "Ghana",
+          "score": "1-1",
+          "tab": true
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -172,7 +348,23 @@
       "slot": "1H vs 2J",
       "home": "Espagne",
       "away": "Algérie",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Espagne",
+          "score": "2-0",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Espagne",
+          "score": "2-0",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Espagne",
+          "score": "2-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -184,7 +376,23 @@
       "slot": "1B vs 3G",
       "home": "Suisse",
       "away": "Iran",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Suisse",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Suisse",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Suisse",
+          "score": "1-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -196,7 +404,23 @@
       "slot": "1J vs 2H",
       "home": "Argentine",
       "away": "Cap-Vert",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Argentine",
+          "score": "2-0",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Argentine",
+          "score": "3-0",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Argentine",
+          "score": "3-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -208,7 +432,23 @@
       "slot": "1K vs 3L",
       "home": "Portugal",
       "away": "Croatie",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Portugal",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Portugal",
+          "score": "1-0",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Portugal",
+          "score": "1-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -220,7 +460,23 @@
       "slot": "2D vs 2G",
       "home": "Australie",
       "away": "Égypte",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Égypte",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Égypte",
+          "score": "1-1",
+          "tab": true
+        },
+        "gemini": {
+          "team": "Égypte",
+          "score": "1-1",
+          "tab": true
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
