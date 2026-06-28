@@ -32,14 +32,14 @@
       "count": 1
     }
   ],
-  "last_updated": null,
+  "last_updated": "2026-06-28",
   "matches": [
     {
       "id": "R32-1",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "2A vs 2B",
+      "home": "Afrique du Sud",
+      "away": "Canada",
       "pred": {},
       "winner": null,
       "score": null
@@ -47,9 +47,9 @@
     {
       "id": "R32-2",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1E vs 3B",
+      "home": "Allemagne",
+      "away": "Bosnie",
       "pred": {},
       "winner": null,
       "score": null
@@ -57,9 +57,9 @@
     {
       "id": "R32-3",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1F vs 2C",
+      "home": "Pays-Bas",
+      "away": "Maroc",
       "pred": {},
       "winner": null,
       "score": null
@@ -67,9 +67,9 @@
     {
       "id": "R32-4",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1C vs 2F",
+      "home": "Brésil",
+      "away": "Japon",
       "pred": {},
       "winner": null,
       "score": null
@@ -77,9 +77,9 @@
     {
       "id": "R32-5",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1I vs 3D",
+      "home": "France",
+      "away": "Paraguay",
       "pred": {},
       "winner": null,
       "score": null
@@ -87,9 +87,9 @@
     {
       "id": "R32-6",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "2E vs 2I",
+      "home": "Côte d'Ivoire",
+      "away": "Sénégal",
       "pred": {},
       "winner": null,
       "score": null
@@ -97,9 +97,9 @@
     {
       "id": "R32-7",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1A vs 3F",
+      "home": "Mexique",
+      "away": "Suède",
       "pred": {},
       "winner": null,
       "score": null
@@ -107,9 +107,9 @@
     {
       "id": "R32-8",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1L vs 3K",
+      "home": "Angleterre",
+      "away": "Colombie",
       "pred": {},
       "winner": null,
       "score": null
@@ -117,9 +117,9 @@
     {
       "id": "R32-9",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1D vs 3E",
+      "home": "États-Unis",
+      "away": "Équateur",
       "pred": {},
       "winner": null,
       "score": null
@@ -127,9 +127,9 @@
     {
       "id": "R32-10",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1G vs 3A",
+      "home": "Belgique",
+      "away": "Corée du Sud",
       "pred": {},
       "winner": null,
       "score": null
@@ -137,9 +137,9 @@
     {
       "id": "R32-11",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "2K vs 2L",
+      "home": "RD Congo",
+      "away": "Ghana",
       "pred": {},
       "winner": null,
       "score": null
@@ -147,9 +147,9 @@
     {
       "id": "R32-12",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1H vs 2J",
+      "home": "Espagne",
+      "away": "Algérie",
       "pred": {},
       "winner": null,
       "score": null
@@ -157,9 +157,9 @@
     {
       "id": "R32-13",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1B vs 3G",
+      "home": "Suisse",
+      "away": "Iran",
       "pred": {},
       "winner": null,
       "score": null
@@ -167,9 +167,9 @@
     {
       "id": "R32-14",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1J vs 2H",
+      "home": "Argentine",
+      "away": "Cap-Vert",
       "pred": {},
       "winner": null,
       "score": null
@@ -177,9 +177,9 @@
     {
       "id": "R32-15",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "1K vs 3L",
+      "home": "Portugal",
+      "away": "Croatie",
       "pred": {},
       "winner": null,
       "score": null
@@ -187,9 +187,9 @@
     {
       "id": "R32-16",
       "round": "r32",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "2D vs 2G",
+      "home": "Australie",
+      "away": "Égypte",
       "pred": {},
       "winner": null,
       "score": null
