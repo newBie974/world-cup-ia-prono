@@ -305,11 +305,11 @@
   <section class="podium" id="podium"></section>
 
   <div class="viewtabs">
-    <button data-view="poules" class="active"><span class="material-symbols-outlined">grid_view</span>Phase de poules</button>
-    <button data-view="bracket"><span class="material-symbols-outlined">account_tree</span>Phase finale</button>
+    <button data-view="poules"><span class="material-symbols-outlined">grid_view</span>Phase de poules</button>
+    <button data-view="bracket" class="active"><span class="material-symbols-outlined">account_tree</span>Phase finale</button>
   </div>
 
-  <div id="view-poules">
+  <div id="view-poules" hidden>
 
   <section class="controls neo" style="padding:14px">
     <div class="daystrip" id="daystrip"></div>
@@ -348,7 +348,7 @@
 
   </div><!-- /view-poules -->
 
-  <div id="view-bracket" hidden>
+  <div id="view-bracket">
     <div class="bnote"><span class="material-symbols-outlined">schedule</span> Phase finale — à partir du 28 juin · 32 qualifiés (2 par groupe + 8 meilleurs 3es)</div>
     <div class="broundstrip" id="broundstrip"></div>
     <div class="bracket" id="bracket"></div>
