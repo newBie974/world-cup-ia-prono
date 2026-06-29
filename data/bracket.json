@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-06-28",
+  "last_updated": "2026-06-29",
   "matches": [
     {
       "id": "R32-1",
@@ -57,9 +57,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Canada",
+      "score": "1-0",
+      "tab": false,
       "pens": null
     },
     {
@@ -67,7 +67,7 @@
       "round": "r32",
       "slot": "1E vs 3B",
       "home": "Allemagne",
-      "away": "Bosnie",
+      "away": "Paraguay",
       "pred": {
         "claude": {
           "team": "Allemagne",
@@ -151,7 +151,7 @@
       "round": "r32",
       "slot": "1I vs 3D",
       "home": "France",
-      "away": "Paraguay",
+      "away": "Suède",
       "pred": {
         "claude": {
           "team": "France",
@@ -179,7 +179,7 @@
       "round": "r32",
       "slot": "2E vs 2I",
       "home": "Côte d'Ivoire",
-      "away": "Sénégal",
+      "away": "Norvège",
       "pred": {
         "claude": {
           "team": "Côte d'Ivoire",
@@ -207,7 +207,7 @@
       "round": "r32",
       "slot": "1A vs 3F",
       "home": "Mexique",
-      "away": "Suède",
+      "away": "Équateur",
       "pred": {
         "claude": {
           "team": "Mexique",
@@ -235,7 +235,7 @@
       "round": "r32",
       "slot": "1L vs 3K",
       "home": "Angleterre",
-      "away": "Colombie",
+      "away": "RD Congo",
       "pred": {
         "claude": {
           "team": "Angleterre",
@@ -263,7 +263,7 @@
       "round": "r32",
       "slot": "1D vs 3E",
       "home": "États-Unis",
-      "away": "Équateur",
+      "away": "Bosnie",
       "pred": {
         "claude": {
           "team": "États-Unis",
@@ -291,7 +291,7 @@
       "round": "r32",
       "slot": "1G vs 3A",
       "home": "Belgique",
-      "away": "Corée du Sud",
+      "away": "Sénégal",
       "pred": {
         "claude": {
           "team": "Belgique",
@@ -318,7 +318,7 @@
       "id": "R32-11",
       "round": "r32",
       "slot": "2K vs 2L",
-      "home": "RD Congo",
+      "home": "Colombie",
       "away": "Ghana",
       "pred": {
         "claude": {
@@ -347,7 +347,7 @@
       "round": "r32",
       "slot": "1H vs 2J",
       "home": "Espagne",
-      "away": "Algérie",
+      "away": "Autriche",
       "pred": {
         "claude": {
           "team": "Espagne",
@@ -375,7 +375,7 @@
       "round": "r32",
       "slot": "1B vs 3G",
       "home": "Suisse",
-      "away": "Iran",
+      "away": "Algérie",
       "pred": {
         "claude": {
           "team": "Suisse",
