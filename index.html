@@ -373,11 +373,11 @@
       🏆 <strong>Phase finale — barème pimenté.</strong> Pour le tableau à élimination directe
       (32es → finale), chaque IA reçoit en entrée <mark>tous les résultats et classements de la
       phase de poules</mark>, puis pronostique chaque match. Comme il n'y a plus de nul possible
-      (prolongation puis tirs au but), le barème passe à <strong>3 points par match</strong> :
-      <strong>+1</strong> pour la bonne équipe qualifiée, <strong>+1</strong> pour le score exact
-      (temps réglementaire/prolongation) et <strong>+1</strong> pour avoir deviné si le match va,
-      ou non, <strong>aux tirs au but</strong>. De quoi enfin départager les trois IA, là où elles
-      étaient quasi unanimes en poules.
+      (prolongation puis tirs au but), le barème s'enrichit : <strong>+1</strong> pour la bonne
+      équipe qualifiée, <strong>+1</strong> pour le score exact (temps réglementaire/prolongation)
+      et un <strong>+1 bonus</strong> réservé à l'IA qui <strong>annonce une séance de tirs au but</strong>
+      qui a effectivement lieu (parier « pas de tab » ne rapporte rien). Jusqu'à 3 points par match —
+      de quoi enfin départager les trois IA, là où elles étaient quasi unanimes en poules.
     </p>
   </section>
 
@@ -436,12 +436,13 @@ function predOf(m, key) {
 }
 
 // Barème phase finale : +1 bon qualifié, +1 score exact (temps régl./prolong.),
-// +1 bonne prédiction TAB (le match va, ou non, aux tirs au but). Max 3 pts/match.
+// +1 BONUS si l'IA annonce les tirs au but (tab=true) et qu'ils ont bien lieu.
+// Annoncer « pas de TAB » ne rapporte rien. Max 3 pts/match (2 si pas de séance).
 function bracketPoints(pred, m) {
   let pts = 0;
   if (pred.team && pred.team === m.winner) pts += 1;
   if (pred.score && m.score && pred.score === m.score) pts += 1;
-  if (pred.tab != null && m.tab != null && !!pred.tab === !!m.tab) pts += 1;
+  if (pred.tab && m.tab) pts += 1;
   return pts;
 }
 
@@ -456,7 +457,7 @@ function applyBracket(bracket, totals) {
       scored[a.key] = pts;
       totals[a.key].pts += pts;
       totals[a.key].graded += 1;
-      totals[a.key].possible += 3;          // 3 points en jeu par match de phase finale
+      totals[a.key].possible += m.tab ? 3 : 2;   // le point TAB n'est en jeu que s'il y a séance
     }
     return { ...m, scored };
   });

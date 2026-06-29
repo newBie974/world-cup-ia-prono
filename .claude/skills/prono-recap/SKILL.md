@@ -10,12 +10,13 @@ pronostics aux vrais résultats et tient un classement **cumulé sur tout le tou
 
 - **Phase de poules** (72 matchs, `data/results.json`) : **1 pt par résultat juste**
   (vainqueur OU nul correctement prédit). Pas de bonus score exact.
-- **Phase finale** (bracket, `data/bracket.json`) : barème enrichi, **3 pts max par match** —
+- **Phase finale** (bracket, `data/bracket.json`) : barème enrichi, **jusqu'à 3 pts par match** —
   **+1** bonne équipe qualifiée, **+1** score exact (temps régl./prolongation),
-  **+1** bonne prédiction TAB (le match va, ou non, aux tirs au but). Pas de nul possible.
+  **+1 bonus** si l'IA **annonce une séance de tirs au but** (`tab=true`) qui a effectivement lieu
+  (parier « pas de TAB » ne rapporte rien). Pas de nul possible.
 
-La « réussite » affichée = % des points POSSIBLES gagnés (1 en jeu par match de poule,
-3 par match de phase finale).
+La « réussite » affichée = % des points POSSIBLES gagnés : 1 par match de poule ; 2 par match
+de phase finale, 3 seulement s'il y a une séance de TAB.
 
 ## Fichiers
 

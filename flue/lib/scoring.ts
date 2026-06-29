@@ -89,12 +89,14 @@ function predOf(raw: BracketPred | string | undefined): BracketPred | null {
   return { team: raw.team, score: raw.score ?? null, tab: raw.tab ?? null };
 }
 
-/** Barème phase finale : +1 qualifié, +1 score exact, +1 TAB juste. Max 3. */
+/** Barème phase finale : +1 qualifié, +1 score exact, +1 BONUS si l'IA annonce les tirs
+ * au but (tab=true) et qu'ils ont bien lieu. Annoncer « pas de TAB » ne rapporte rien.
+ * Max 3 (2 s'il n'y a pas de séance). */
 export function bracketPoints(pred: BracketPred, m: BracketMatch): number {
   let pts = 0;
   if (pred.team && pred.team === m.winner) pts += 1;
   if (pred.score && m.score && pred.score === m.score) pts += 1;
-  if (pred.tab != null && m.tab != null && !!pred.tab === !!m.tab) pts += 1;
+  if (pred.tab && m.tab) pts += 1;
   return pts;
 }
 
@@ -129,7 +131,7 @@ export async function record(id: number, winner: string, score: string | undefin
 
 /** Classement cumulé (poules + phase finale) + détail par match noté.
  * totals[ai] = { pts, graded (matchs notés), possible (points en jeu) }.
- * possible : 1 pt/match de poule, 3 pts/match de phase finale. */
+ * possible : 1 pt/match de poule ; 2 pts/match de phase finale (3 s'il y a une séance de TAB). */
 export async function standings() {
   const [matches, res, brk] = await Promise.all([loadPredictions(), loadResults(), loadBracket()]);
   const byId = new Map(matches.map((m) => [String(m.id), m]));
@@ -161,7 +163,7 @@ export async function standings() {
       pts[a] = p;
       totals[a].pts += p;
       totals[a].graded += 1;
-      totals[a].possible += 3;
+      totals[a].possible += m.tab ? 3 : 2;   // point TAB en jeu seulement s'il y a séance
     }
     bracketGraded.push({ id: m.id, round: m.round, match: `${m.home} – ${m.away}`, winner: m.winner, score: m.score, tab: m.tab, pens: m.pens, pts });
   }

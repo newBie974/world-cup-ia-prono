@@ -3,11 +3,12 @@
 
 Couvre la phase de poules ET la phase finale (bracket) :
 - Poules  : data/predictions.json + data/results.json — 1 pt par résultat juste.
-- Finale  : data/bracket.json — barème enrichi, 3 pts max par match :
-    +1 bonne équipe qualifiée, +1 score exact (temps régl./prolong.), +1 prédiction TAB juste.
+- Finale  : data/bracket.json — barème enrichi, jusqu'à 3 pts par match :
+    +1 bonne équipe qualifiée, +1 score exact (temps régl./prolong.),
+    +1 BONUS si l'IA annonce une séance de tirs au but qui a effectivement lieu.
 
 Le classement est cumulé sur les deux phases. La « réussite » est le pourcentage des
-points POSSIBLES réellement gagnés (1 point en jeu par match de poule, 3 par match de finale).
+points POSSIBLES réellement gagnés (1 par match de poule ; 2 par match de finale, 3 s'il y a TAB).
 
 Usage:
     python3 scripts/score.py                      # classement général
@@ -54,14 +55,15 @@ def _pred_of(raw):
 
 
 def bracket_points(pred, m):
-    """Barème phase finale : +1 qualifié, +1 score exact, +1 TAB. Max 3."""
+    """Barème phase finale : +1 qualifié, +1 score exact, +1 BONUS si l'IA annonce les
+    tirs au but (tab=True) et qu'ils ont bien lieu. Annoncer « pas de TAB » ne rapporte rien.
+    Max 3 (2 s'il n'y a pas de séance)."""
     pts = 0
     if pred.get("team") and pred["team"] == m.get("winner"):
         pts += 1
     if pred.get("score") and m.get("score") and pred["score"] == m["score"]:
         pts += 1
-    ptab, mtab = pred.get("tab"), m.get("tab")
-    if ptab is not None and mtab is not None and bool(ptab) == bool(mtab):
+    if pred.get("tab") and m.get("tab"):
         pts += 1
     return pts
 
@@ -106,7 +108,7 @@ def evaluate(matches, results, bracket):
             row["pts"][ai] = pts
             totals[ai]["pts"] += pts
             totals[ai]["graded"] += 1
-            totals[ai]["possible"] += 3
+            totals[ai]["possible"] += 3 if m.get("tab") else 2  # point TAB en jeu seulement s'il y a séance
         bracket_rows.append(row)
 
     return group_rows, bracket_rows, totals
@@ -148,7 +150,7 @@ def render(group_rows, bracket_rows, totals, last_updated, focus_date, focus_rou
     if focus_round:
         rnd_rows = [r for r in bracket_rows if r["round"] == focus_round]
         title = ROUND_LABEL.get(focus_round, focus_round)
-        out.append(f"## Focus {title} ({len(rnd_rows)} matchs · barème +1 qualifié / +1 score / +1 TAB)\n")
+        out.append(f"## Focus {title} ({len(rnd_rows)} matchs · +1 qualifié / +1 score / +1 TAB annoncé)\n")
         if rnd_rows:
             out.append("| Match | Résultat | Claude | GPT | Gemini |")
             out.append("|---|---|---|---|---|")

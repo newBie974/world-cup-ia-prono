@@ -36,9 +36,10 @@ matchs de phase finale par `id` texte (`R32-1`, `QF-3`, `FINAL`…).
 Classement **cumulé sur tout le tournoi**, en deux barèmes :
 - **Poules** : 1 point par résultat juste (vainqueur OU nul). Pas de bonus score exact —
   en poules seul GPT donnait des scores, le garder départagerait injustement.
-- **Phase finale** : 3 points max par match — **+1** bonne équipe qualifiée, **+1** score exact
-  (temps régl./prolong.), **+1** bonne prédiction TAB. Équitable car les 3 IA donnent désormais
-  score + TAB. La « réussite » = % des points possibles (1 en jeu/match de poule, 3/match de finale).
+- **Phase finale** : jusqu'à 3 points par match — **+1** bonne équipe qualifiée, **+1** score exact
+  (temps régl./prolong.), **+1 bonus** réservé à l'IA qui **annonce une séance de tirs au but**
+  (`tab=true`) qui a effectivement lieu (parier « pas de TAB » ne rapporte rien). La « réussite » =
+  % des points possibles : 1 par match de poule ; 2 par match de finale, 3 seulement s'il y a une séance.
 
 La logique existe en double, volontairement identique :
 - `scripts/score.py` (Python, utilisé par le skill)
