@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-06-30",
+  "last_updated": "2026-07-01",
   "matches": [
     {
       "id": "R32-1",
@@ -169,9 +169,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "France",
+      "score": "3-0",
+      "tab": false,
       "pens": null
     },
     {
@@ -197,9 +197,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Norvège",
+      "score": "2-1",
+      "tab": false,
       "pens": null
     },
     {
@@ -225,9 +225,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Mexique",
+      "score": "2-0",
+      "tab": false,
       "pens": null
     },
     {
