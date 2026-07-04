@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-03",
+  "last_updated": "2026-07-04",
   "matches": [
     {
       "id": "R32-1",
@@ -337,9 +337,9 @@
           "tab": true
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Colombie",
+      "score": "1-0",
+      "tab": false,
       "pens": null
     },
     {
@@ -421,9 +421,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Argentine",
+      "score": "3-2",
+      "tab": false,
       "pens": null
     },
     {
@@ -477,18 +477,24 @@
           "tab": true
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
-      "pens": null
+      "winner": "Égypte",
+      "score": "1-1",
+      "tab": true,
+      "pens": "4-2"
     },
     {
       "id": "R16-1",
       "round": "r16",
-      "slot": "",
-      "home": null,
-      "away": null,
-      "pred": {},
+      "slot": "W R32-1 vs W R32-3",
+      "home": "Canada",
+      "away": "Maroc",
+      "pred": {
+        "claude": {
+          "team": "Maroc",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -497,10 +503,16 @@
     {
       "id": "R16-2",
       "round": "r16",
-      "slot": "",
-      "home": null,
-      "away": null,
-      "pred": {},
+      "slot": "W R32-2 vs W R32-5",
+      "home": "Paraguay",
+      "away": "France",
+      "pred": {
+        "claude": {
+          "team": "France",
+          "score": "2-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -509,10 +521,16 @@
     {
       "id": "R16-3",
       "round": "r16",
-      "slot": "",
-      "home": null,
-      "away": null,
-      "pred": {},
+      "slot": "W R32-4 vs W R32-6",
+      "home": "Brésil",
+      "away": "Norvège",
+      "pred": {
+        "claude": {
+          "team": "Brésil",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -521,10 +539,16 @@
     {
       "id": "R16-4",
       "round": "r16",
-      "slot": "",
-      "home": null,
-      "away": null,
-      "pred": {},
+      "slot": "W R32-7 vs W R32-8",
+      "home": "Mexique",
+      "away": "Angleterre",
+      "pred": {
+        "claude": {
+          "team": "Angleterre",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -533,10 +557,16 @@
     {
       "id": "R16-5",
       "round": "r16",
-      "slot": "",
-      "home": null,
-      "away": null,
-      "pred": {},
+      "slot": "W R32-15 vs W R32-12",
+      "home": "Portugal",
+      "away": "Espagne",
+      "pred": {
+        "claude": {
+          "team": "Espagne",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -545,10 +575,16 @@
     {
       "id": "R16-6",
       "round": "r16",
-      "slot": "",
-      "home": null,
-      "away": null,
-      "pred": {},
+      "slot": "W R32-9 vs W R32-10",
+      "home": "États-Unis",
+      "away": "Belgique",
+      "pred": {
+        "claude": {
+          "team": "États-Unis",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -557,10 +593,16 @@
     {
       "id": "R16-7",
       "round": "r16",
-      "slot": "",
-      "home": null,
-      "away": null,
-      "pred": {},
+      "slot": "W R32-14 vs W R32-16",
+      "home": "Argentine",
+      "away": "Égypte",
+      "pred": {
+        "claude": {
+          "team": "Argentine",
+          "score": "2-0",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -569,10 +611,16 @@
     {
       "id": "R16-8",
       "round": "r16",
-      "slot": "",
-      "home": null,
-      "away": null,
-      "pred": {},
+      "slot": "W R32-13 vs W R32-11",
+      "home": "Suisse",
+      "away": "Colombie",
+      "pred": {
+        "claude": {
+          "team": "Colombie",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
