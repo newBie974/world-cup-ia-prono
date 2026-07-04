@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-04",
+  "last_updated": "2026-06-29",
   "matches": [
     {
       "id": "R32-1",
@@ -493,6 +493,16 @@
           "team": "Maroc",
           "score": "2-1",
           "tab": false
+        },
+        "gpt": {
+          "team": "Maroc",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Maroc",
+          "score": "2-1",
+          "tab": false
         }
       },
       "winner": null,
@@ -508,6 +518,16 @@
       "away": "France",
       "pred": {
         "claude": {
+          "team": "France",
+          "score": "2-0",
+          "tab": false
+        },
+        "gpt": {
+          "team": "France",
+          "score": "2-0",
+          "tab": false
+        },
+        "gemini": {
           "team": "France",
           "score": "2-0",
           "tab": false
@@ -529,6 +549,16 @@
           "team": "Brésil",
           "score": "2-1",
           "tab": false
+        },
+        "gpt": {
+          "team": "Brésil",
+          "score": "3-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Brésil",
+          "score": "3-1",
+          "tab": false
         }
       },
       "winner": null,
@@ -547,6 +577,16 @@
           "team": "Angleterre",
           "score": "2-1",
           "tab": false
+        },
+        "gpt": {
+          "team": "Angleterre",
+          "score": "1-1",
+          "tab": true
+        },
+        "gemini": {
+          "team": "Angleterre",
+          "score": "1-1",
+          "tab": true
         }
       },
       "winner": null,
@@ -564,6 +604,16 @@
         "claude": {
           "team": "Espagne",
           "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Espagne",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Espagne",
+          "score": "1-0",
           "tab": false
         }
       },
@@ -583,6 +633,16 @@
           "team": "États-Unis",
           "score": "2-1",
           "tab": false
+        },
+        "gpt": {
+          "team": "Belgique",
+          "score": "2-2",
+          "tab": true
+        },
+        "gemini": {
+          "team": "États-Unis",
+          "score": "2-2",
+          "tab": true
         }
       },
       "winner": null,
@@ -601,6 +661,16 @@
           "team": "Argentine",
           "score": "2-0",
           "tab": false
+        },
+        "gpt": {
+          "team": "Argentine",
+          "score": "3-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Argentine",
+          "score": "3-0",
+          "tab": false
         }
       },
       "winner": null,
@@ -617,6 +687,16 @@
       "pred": {
         "claude": {
           "team": "Colombie",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Suisse",
+          "score": "1-1",
+          "tab": true
+        },
+        "gemini": {
+          "team": "Suisse",
           "score": "2-1",
           "tab": false
         }
