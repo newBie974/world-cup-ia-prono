@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-05",
+  "last_updated": "2026-07-06",
   "matches": [
     {
       "id": "R32-1",
@@ -561,9 +561,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Norvège",
+      "score": "1-2",
+      "tab": false,
       "pens": null
     },
     {
@@ -589,9 +589,9 @@
           "tab": true
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Angleterre",
+      "score": "2-3",
+      "tab": false,
       "pens": null
     },
     {
