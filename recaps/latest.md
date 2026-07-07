@@ -23,6 +23,7 @@ _Dernière mise à jour : 2026-07-07_
 
 ## Analyse
 
-- **GPT reprend de l'avance** avec 2 pts de plus que Claude après le choc Ibérique : Espagne 1-0 Portugal (but de Merino in extremis). Les 3 IA avaient prédit la victoire espagnole, mais aucune n'a deviné le score exact 0-1.
-- **Coup de tonnerre USA–Belgique** : la Belgique écrase les États-Unis 4-1 dans leur propre jardin. GPT est le seul à avoir misé sur les Diables Rouges (+1), Claude et Gemini (qui pariaient sur les Américains) repartent bredouilles.
-- **Argentine–Égypte et Suisse–Colombie** non encore joués au moment de ce récap — 4 points supplémentaires seront distribués lors du prochain run.
+- **GPT creuse l'écart** (69 pts, 58%) : seul à avoir prévu la victoire de la Belgique sur les États-Unis (4-1), ce qui lui offre 2 points d'avance sur Claude (67) et 10 sur Gemini (59).
+- **Choc ibérique : Espagne 1-0 Portugal** — les 3 IA avaient toutes misé sur la Roja, validées. C'est Mikel Merino qui envoie l'Espagne en quarts d'une tête en 90+1'. Fin de Mondial pour Cristiano Ronaldo.
+- **Belgique étrille les États-Unis 4-1** — gros choc pour l'équipe hôte éliminée en 8es. GPT était le seul à avoir vu la victoire belge ; Claude et Gemini parient perdant sur les USA.
+- 2 matchs encore à noter le 7 juillet (Argentine–Égypte et Suisse–Colombie). Quarts déjà connus : Maroc–France, Norvège–Angleterre, Espagne–Belgique. Les pronos IA pour les quarts sont attendus.
