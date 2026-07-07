@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-06",
+  "last_updated": "2026-07-07",
   "matches": [
     {
       "id": "R32-1",
@@ -617,9 +617,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Espagne",
+      "score": "0-1",
+      "tab": false,
       "pens": null
     },
     {
@@ -645,9 +645,9 @@
           "tab": true
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Belgique",
+      "score": "1-4",
+      "tab": false,
       "pens": null
     },
     {
