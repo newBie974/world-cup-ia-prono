@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-07",
+  "last_updated": "2026-07-08",
   "matches": [
     {
       "id": "R32-1",
@@ -673,9 +673,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Argentine",
+      "score": "3-2",
+      "tab": false,
       "pens": null
     },
     {
@@ -701,10 +701,10 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
-      "pens": null
+      "winner": "Suisse",
+      "score": "0-0",
+      "tab": true,
+      "pens": "4-3"
     },
     {
       "id": "QF-1",
@@ -745,9 +745,9 @@
     {
       "id": "QF-4",
       "round": "qf",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "W R16-7 vs W R16-8",
+      "home": "Argentine",
+      "away": "Suisse",
       "pred": {},
       "winner": null,
       "score": null,
