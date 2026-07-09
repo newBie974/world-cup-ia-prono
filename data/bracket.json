@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-08",
+  "last_updated": "2026-07-06",
   "matches": [
     {
       "id": "R32-1",
@@ -712,7 +712,23 @@
       "slot": "W R16-1 vs W R16-2",
       "home": "Maroc",
       "away": "France",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "France",
+          "score": "1-2",
+          "tab": false
+        },
+        "gpt": {
+          "team": "France",
+          "score": "0-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "France",
+          "score": "1-2",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -724,7 +740,23 @@
       "slot": "W R16-3 vs W R16-4",
       "home": "Norvège",
       "away": "Angleterre",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Angleterre",
+          "score": "1-2",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Angleterre",
+          "score": "2-2",
+          "tab": true
+        },
+        "gemini": {
+          "team": "Angleterre",
+          "score": "2-2",
+          "tab": true
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -736,7 +768,23 @@
       "slot": "W R16-5 vs W R16-6",
       "home": "Espagne",
       "away": "Belgique",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Espagne",
+          "score": "2-0",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Espagne",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Espagne",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -748,7 +796,23 @@
       "slot": "W R16-7 vs W R16-8",
       "home": "Argentine",
       "away": "Suisse",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Argentine",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Argentine",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "Argentine",
+          "score": "1-1",
+          "tab": true
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
