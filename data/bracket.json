@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-10",
+  "last_updated": "2026-07-11",
   "matches": [
     {
       "id": "R32-1",
@@ -785,9 +785,9 @@
           "tab": false
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Espagne",
+      "score": "2-1",
+      "tab": false,
       "pens": null
     },
     {
@@ -821,9 +821,9 @@
     {
       "id": "SF-1",
       "round": "sf",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "W QF-1 vs W QF-3",
+      "home": "France",
+      "away": "Espagne",
       "pred": {},
       "winner": null,
       "score": null,
