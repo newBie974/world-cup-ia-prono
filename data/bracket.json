@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-11",
+  "last_updated": "2026-07-12",
   "matches": [
     {
       "id": "R32-1",
@@ -757,9 +757,9 @@
           "tab": true
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Angleterre",
+      "score": "1-2",
+      "tab": false,
       "pens": null
     },
     {
@@ -813,9 +813,9 @@
           "tab": true
         }
       },
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Argentine",
+      "score": "3-1",
+      "tab": false,
       "pens": null
     },
     {
@@ -833,9 +833,9 @@
     {
       "id": "SF-2",
       "round": "sf",
-      "slot": "",
-      "home": null,
-      "away": null,
+      "slot": "W QF-2 vs W QF-4",
+      "home": "Angleterre",
+      "away": "Argentine",
       "pred": {},
       "winner": null,
       "score": null,
