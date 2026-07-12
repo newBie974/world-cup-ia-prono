@@ -824,7 +824,23 @@
       "slot": "W QF-1 vs W QF-3",
       "home": "France",
       "away": "Espagne",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "France",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "France",
+          "score": "2-1",
+          "tab": false
+        },
+        "gemini": {
+          "team": "France",
+          "score": "2-1",
+          "tab": false
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
@@ -836,7 +852,23 @@
       "slot": "W QF-2 vs W QF-4",
       "home": "Angleterre",
       "away": "Argentine",
-      "pred": {},
+      "pred": {
+        "claude": {
+          "team": "Angleterre",
+          "score": "2-1",
+          "tab": false
+        },
+        "gpt": {
+          "team": "Argentine",
+          "score": "1-1",
+          "tab": true
+        },
+        "gemini": {
+          "team": "Argentine",
+          "score": "1-1",
+          "tab": true
+        }
+      },
       "winner": null,
       "score": null,
       "tab": null,
