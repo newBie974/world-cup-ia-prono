@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-16",
+  "last_updated": "2026-07-19",
   "matches": [
     {
       "id": "R32-1",
@@ -881,9 +881,9 @@
       "home": "France",
       "away": "Angleterre",
       "pred": {},
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Angleterre",
+      "score": "4-6",
+      "tab": false,
       "pens": null
     },
     {
