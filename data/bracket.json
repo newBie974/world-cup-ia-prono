@@ -32,7 +32,7 @@
       "count": 1
     }
   ],
-  "last_updated": "2026-07-19",
+  "last_updated": "2026-07-20",
   "matches": [
     {
       "id": "R32-1",
@@ -893,9 +893,9 @@
       "home": "Espagne",
       "away": "Argentine",
       "pred": {},
-      "winner": null,
-      "score": null,
-      "tab": null,
+      "winner": "Espagne",
+      "score": "1-0",
+      "tab": false,
       "pens": null
     }
   ]
